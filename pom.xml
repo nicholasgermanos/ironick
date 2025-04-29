@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.nickblogsite</groupId>
-	<artifactId>springboot-backend</artifactId>
+	<artifactId>nickblog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springboot-backend</name>
 	<description>Nick&apos;s Blog Site</description>
