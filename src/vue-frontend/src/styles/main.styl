@@ -1,0 +1,32 @@
+$deep-slate-blue = #3D405B
+$muted-sage-green = #81B29A
+$antique-white = #F4F1DE
+$terracotta = #E07A5F
+
+$grid-breakpoint-xs = 0
+$grid-breakpoint-sm = 576px
+$grid-breakpoint-md = 768px
+$grid-breakpoint-lg = 992px
+$grid-breakpoint-xl = 1200px
+$grid-breakpoint-xxl = 1400px
+
+// Phone specific css can go under this
+@media (min-width: $grid-breakpoint-sm)
+  .newlines
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+.funky
+  color: red;
+
+.deep-slate-blue
+  color: $deep-slate-blue;
+  border-color: $deep-slate-blue;
+
+.muted-sage-green
+  background: $muted-sage-green;
+
+.antique-white
+  color: $antique-white;
+  stroke: $antique-white;
+  border-color: $antique-white;
