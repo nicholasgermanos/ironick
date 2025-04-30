@@ -50,7 +50,7 @@ export default {
   margin: 10px 10px 10px 10px;
   width: 18rem;
   height: 20rem;
-  overflow: hidden
+  overflow: hidden;
 
 .card-body
   text-align: left;
@@ -60,13 +60,15 @@ export default {
 
 .preview-cover-image
   height 55%;
-  overflow: hidden
+  min-height: 55%;
+  overflow: hidden;
 
 .zoom
   img
-    transition: transform .8s; /* Animation */
+    transition: transform .8s;
 
 .zoom:hover
   img
-    transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    transform: scale(1.2);
+
 </style>
