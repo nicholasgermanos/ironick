@@ -49,9 +49,13 @@ export default {
 // Main card
 .card
   margin: 10px 10px 10px 10px;
+  border: none;
   width: 18rem;
   height: 22rem;
   overflow: hidden;
+
+.card-body
+  background: $theme-white;
 
 // Cover images
 .preview-cover-image

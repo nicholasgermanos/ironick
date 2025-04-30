@@ -2,30 +2,30 @@
   <div class="menu-bar">
     <nav class="navbar navbar-expand-sm fixed-top">
       <div class="container">
-        <router-link to="/" role="button" class="fw-bold navbar-brand antique-white">NickBlog</router-link>
-        <button class="hamburger antique-white navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
+        <router-link to="/" role="button" class="fw-bold navbar-brand navbar-links">NickBlog</router-link>
+        <button class="hamburger navbar-links navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
                 aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="fa-solid fa-bars"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggle">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <router-link to="/" class="fw-bold nav-link antique-white">Home</router-link>
+              <router-link to="/" class="fw-bold nav-link navbar-links">Home</router-link>
             </li>
             <li class="nav-item">
-              <router-link  to="/blogs" class="fw-bold nav-link antique-white">Articles</router-link>
+              <router-link to="/blogs" class="fw-bold nav-link navbar-links">Articles</router-link>
             </li>
             <li v-if="isLoggedIn()" class="nav-item">
-              <router-link  to="/newEntryForm" class="fw-bold nav-link antique-white">New Article</router-link>
+              <router-link to="/newEntryForm" class="fw-bold nav-link navbar-links">New Article</router-link>
             </li>
             <li v-if="isLoggedOut()" class="nav-item">
-              <router-link  to="/login" class="fw-bold nav-link antique-white">Login</router-link>
+              <router-link to="/login" class="fw-bold nav-link navbar-links">Login</router-link>
             </li>
             <li v-if="isLoggedOut()" class="nav-item">
-              <router-link  to="/register" class="fw-bold nav-link antique-white">Register</router-link>
+              <router-link to="/register" class="fw-bold nav-link navbar-links">Register</router-link>
             </li>
             <li v-if="isLoggedIn()" class="nav-item">
-            <router-link  to="/logout" class="fw-bold nav-link antique-white">Logout</router-link>
+            <router-link to="/logout" class="fw-bold nav-link navbar-links">Logout</router-link>
           </li>
           </ul>
         </div>
@@ -49,18 +49,21 @@ export default {
 
 <style lang="stylus" scoped>
 .navbar
+  .navbar-links
+    color: $theme-cream
+    
   button, span, a
     &:hover
       transform: scale(1.05);
-      color: $antique-white;
+      color: $theme-cream;
     &:focus
-      color: $antique-white;
+      color: $theme-cream;
     transition ease 0.2s
 
-  background: $terracotta;
+  background: $theme-dark;
 
   .hamburger
-    border-color: $antique-white;
+    border-color: $theme-cream;
 
   .hamburger:focus
     box-shadow: none;

@@ -1,6 +1,7 @@
 <template>
   <MenuBar :key="menuBarKey"/>
   <div class="newlines">
+    <ShootingStars/>
     <router-view @login-success="forceRerender" @logout-success="forceRerender"/>
   </div>
 </template>
@@ -8,6 +9,7 @@
 <script>
   import MenuBar from '@/components/MenuBar.vue';
   import { ref } from 'vue';
+  import ShootingStars from '@/components/ShootingStars.vue';
 
   export default {
     name: 'App',
@@ -24,6 +26,7 @@
       }
     },
     components: {
+      ShootingStars,
       MenuBar
     }
   };
@@ -35,6 +38,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin-top: 40px;
-  background: #F4F1DE;
   text-align: center;
+
+  // You also need to change the body style in index.html if you want to change the background
+  background: $theme-grey-ish;
 </style>

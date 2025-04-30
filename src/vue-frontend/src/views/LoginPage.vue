@@ -1,5 +1,5 @@
 <template>
-  <form @submit="submit" class="container m-3">
+  <form @submit="submit" class="container blog-form m-3">
     <div class="m-4">
       <h1>Welcome back</h1>
       <input v-model="user.email" placeholder="Email"/>
@@ -35,22 +35,6 @@ export default {
 
 
 <style lang="stylus" scoped>
-input, textarea
-  width: 90%;
-  margin-top: 30px;
-  border: 0;
-  border-bottom: 1px solid #aaa;
-  font-size: 13px;
-  font-weight: 300;
-  color: #797a9e;
-  letter-spacing: 0.11em;
-
-.container
-  width: fit-content;
-  background: white;
-  position: relative;
-  display: inline-flex;
-  box-shadow: 2px 2px 10px 0 rgba(33, 33, 33, 0.2);
 
 button
   margin-top: 20px;

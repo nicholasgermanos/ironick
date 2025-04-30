@@ -1,5 +1,5 @@
 <template>
-  <form @submit="submit" class="container m-3">
+  <form @submit="submit" class="container blog-form m-3">
     <div class="m-4">
       <h1>New Blog Post</h1>
       <p>Please remember to back up your posts as we are still running in beta mode</p>
@@ -86,46 +86,15 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-body,
-form
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 90%;
-
+body, form
   .rich-text-editor
     margin-top 30px;
 
   .ql-container
     min-height: 200px !important;
 
-  input, textarea
-    width: 90%;
-    margin-top: 30px;
-    border: 0;
-    border-bottom: 1px solid #aaa;
-    font-size: 13px;
-    font-weight: 300;
-    color: #797a9e;
-    letter-spacing: 0.11em;
-
-    &::placeholder
-      color: #333;
-      font-size: 14px;
-
-    &:focus
-      outline: 0;
-      border-bottom: 2px solid rgba(129, 178, 154, 1);
-
   button
     margin-top: 20px;
-
-.container
-  width: 100%;
-  background: white;
-  position: relative;
-  display: inline-flex;
-  box-shadow: 2px 2px 10px 0 rgba(33, 33, 33, 0.2);
 
 #image-preview
   width: 100%;
