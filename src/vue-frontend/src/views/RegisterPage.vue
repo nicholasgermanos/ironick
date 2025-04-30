@@ -6,7 +6,7 @@
       <input v-model="user.lastName" placeholder="Surname"/>
       <input v-model="user.email" placeholder="Email"/>
       <input type="password" v-model="user.password" placeholder="Password"/>
-      <button class="muted-sage-green" type="submit" label="Register">Publish</button>
+      <button type="submit" label="Register">Register</button>
     </div>
   </form>
 </template>
@@ -54,19 +54,6 @@ input, textarea
   box-shadow: 2px 2px 10px 0 rgba(33, 33, 33, 0.2);
 
 button
-  width: 100px;
-  height: 30px;
-  border: 0;
-  outline: 0;
-  color: white;
-  font-size: 15px;
-  font-weight: 400;
-  position: relative;
-  z-index: 3;
-  font-family: $font;
-  cursor: pointer;
-  align-self: center;
-  margin 20px;
-
-
+  margin-top: 20px;
+  width: 90%;
 </style>

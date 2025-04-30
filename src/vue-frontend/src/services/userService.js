@@ -15,7 +15,6 @@ class UserService {
 			if (isEmptyCascade(response, ['data', 'principal', 'user', 'role']) === false ) {
 				localStorage.setItem('user', response.data.principal.user );
 				localStorage.setItem('role', response.data.principal.user.role );
-				router.push( "/" ).then()
 			}
 		}).catch(error => {
 			console.log(error)

@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit" class="container m-3">
+  <form @submit="submit" class="container m-3">
     <div class="m-4">
       <h1>Login</h1>
       <input v-model="user.email" placeholder="Email"/>
@@ -25,8 +25,8 @@ export default {
   },
   methods: {
     submit: function() {
-      this.$emit('login-success')
       UserService.login(this.user)
+      this.$emit('login-success')
       router.push("/")
     }
   }
