@@ -15,10 +15,11 @@
       <h1 class="text-uppercase">{{ blogPage.title }}</h1>
       <h4 class="fst-italic fw-light">{{ blogPage.subtitle }}</h4>
       <div class="ql-editor" v-html="blogPage.body"/>
-    </div>
-    <div v-if="isAdmin()" class="text-center">
-      <button class="deep-slate-blue m-2" v-on:click="deleteBlogPage(blogPage)"><i class="fa-solid fa-trash"></i> Delete</button>
-      <button class="deep-slate-blue m-2" v-on:click="deleteBlogPage(blogPage)"><i class="fa-solid fa-pencil"></i> Edit</button>
+
+      <div v-if="isAdmin()" class="text-center">
+        <button v-on:click="deleteBlogPage(blogPage)"><i class="fa-solid fa-trash"></i> Delete</button>
+        <button v-on:click="deleteBlogPage(blogPage)"><i class="fa-solid fa-pencil"></i> Edit</button>
+      </div>
     </div>
   </div>
 </template>

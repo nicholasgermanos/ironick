@@ -1,6 +1,6 @@
 import axios from 'axios'
 import router from '@/router';
-import { isEmpty } from '@/utils/utils';
+import { isEmpty, isEmptyCascade } from '@/utils/utils';
 
 const USER_API_BASE_URL = 'http://localhost:8080/api/users'
 const USER_API_LOGIN_URL = 'http://localhost:8080/api/login'
@@ -12,9 +12,9 @@ class UserService {
 	}
 	login(user) {
 		axios.post(USER_API_LOGIN_URL, user).then(response => {
-			if (isEmpty(response.data) === false ) {
-				localStorage.setItem('user', response.data );
-				localStorage.setItem('role', response.data.role );
+			if (isEmptyCascade(response, ['data', 'principal', 'user', 'role']) === false ) {
+				localStorage.setItem('user', response.data.principal.user );
+				localStorage.setItem('role', response.data.principal.user.role );
 				router.push( "/" ).then()
 			}
 		}).catch(error => {

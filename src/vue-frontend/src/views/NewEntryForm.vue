@@ -12,7 +12,7 @@
       <div class="rich-text-editor">
         <QuillEditor :toolbar="toolbarOptions" theme="snow" v-model:content="blogPost.body" content-type="html" placeholder="Body"/>
       </div>
-      <button class="muted-sage-green" type="submit" label="Publish" v-on:click="submit">Publish</button>
+      <button type="submit" label="Publish" v-on:click="submit">Publish</button>
     </div>
   </form>
 </template>
@@ -118,19 +118,7 @@ form
       border-bottom: 2px solid rgba(129, 178, 154, 1);
 
   button
-    width: 100px;
-    height: 30px;
-    border: 0;
-    outline: 0;
-    color: white;
-    font-size: 15px;
-    font-weight: 400;
-    position: relative;
-    z-index: 3;
-    font-family: $font;
-    cursor: pointer;
-    align-self: center;
-    margin 20px;
+    margin-top: 20px;
 
 .container
   width: 100%;
