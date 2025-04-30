@@ -17,8 +17,8 @@
       <div class="ql-editor" v-html="blogPage.body"/>
 
       <div v-if="isAdmin()" class="text-center">
-        <button v-on:click="deleteBlogPage(blogPage)"><i class="fa-solid fa-trash"></i> Delete</button>
-        <button v-on:click="deleteBlogPage(blogPage)"><i class="fa-solid fa-pencil"></i> Edit</button>
+        <button class="nick-button" v-on:click="deleteBlogPage(blogPage)"><i class="fa-solid fa-trash"></i> Delete</button>
+        <button class="nick-button" v-on:click="deleteBlogPage(blogPage)"><i class="fa-solid fa-pencil"></i> Edit</button>
       </div>
     </div>
   </div>

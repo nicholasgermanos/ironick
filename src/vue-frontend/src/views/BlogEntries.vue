@@ -1,8 +1,3 @@
-<script setup>
-  import BlogPageService from '@/services/blogPageService'
-  BlogPageService.getBlogPages()
-</script>
-
 <template>
   <div class="container p-5 flex-wrap">
     <div class="d-flex flex-wrap justify-content-center">
@@ -11,9 +6,13 @@
           <img :src="getCoverImage(blogEntry)" class="card-img-top" alt="Cover Image">
         </div>
         <div class="card-body">
-          <h5 class="funky">{{ blogEntry.title }}</h5>
-          <p class="card-text">{{ blogEntry.subtitle }}</p>
-          <router-link v-if="blogEntry.id" :to="{name: 'blog', params: {blogID: blogEntry.id}}" class="w-full deep-slate-blue"><button>Read<span class="arrow fa-solid fa-arrow-right"/></button></router-link>
+          <div class="card-headers">
+            <h5 class="funky">{{ blogEntry.title }}</h5>
+            <p>{{ blogEntry.subtitle }}</p>
+          </div>
+          <div class="card-read-button">
+            <router-link v-if="blogEntry.id" :to="{name: 'blog', params: {blogID: blogEntry.id}}" class="w-full"><button class="nick-button">Read<span class="arrow fa-solid fa-arrow-right"/></button></router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -22,6 +21,7 @@
 
 <script>
 import { getCoverImage } from '@/utils/blogPageUtils';
+import BlogPageService from '@/services/blogPageService';
 
 export default {
   name: 'BlogEntries',
@@ -46,22 +46,20 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+// Main card
 .card
   margin: 10px 10px 10px 10px;
   width: 18rem;
-  height: 20rem;
+  height: 22rem;
   overflow: hidden;
 
-.card-body
-  text-align: left;
-
-.arrow
-  margin-left: 3px;
-
+// Cover images
 .preview-cover-image
-  height 55%;
-  min-height: 55%;
+  height 50%;
+  min-height: 50%;
   overflow: hidden;
+img
+  height: 100%;
 
 .zoom
   img
@@ -70,5 +68,20 @@ export default {
 .zoom:hover
   img
     transform: scale(1.1);
+
+// Text on cards
+.card-body
+  height: 45%;
+  text-align: left;
+
+.card-headers
+  height: 60%;
+
+// Buttons
+.card-read-button
+  height: 40%;
+
+.arrow
+  margin-left: 3px;
 
 </style>

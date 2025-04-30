@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit" class="container m-3">
+  <form @submit="submit" class="container m-3">
     <div class="m-4">
       <h1>New Blog Post</h1>
       <p>Please remember to back up your posts as we are still running in beta mode</p>
@@ -12,7 +12,7 @@
       <div class="rich-text-editor">
         <QuillEditor :toolbar="toolbarOptions" theme="snow" v-model:content="blogPost.body" content-type="html" placeholder="Body"/>
       </div>
-      <button type="submit" label="Publish" v-on:click="submit">Publish</button>
+      <button class="nick-button" type="submit" label="Publish" v-on:click="submit">Publish</button>
     </div>
   </form>
 </template>

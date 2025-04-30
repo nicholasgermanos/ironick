@@ -1,12 +1,12 @@
 <template>
   <form @submit.prevent="submit" class="container m-3">
     <div class="m-4">
-      <h1>Register</h1>
+      <h1>Hi, nice to meet you</h1>
       <input v-model="user.firstName" placeholder="First Name"/>
       <input v-model="user.lastName" placeholder="Surname"/>
       <input v-model="user.email" placeholder="Email"/>
       <input type="password" v-model="user.password" placeholder="Password"/>
-      <button type="submit" label="Register">Register</button>
+      <button class="nick-button" type="submit" label="Register">Register</button>
     </div>
   </form>
 </template>
