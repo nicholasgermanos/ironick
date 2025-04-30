@@ -18,11 +18,11 @@ class BlogPageService {
 
 		axios.post( BLOG_PAGE_API_ADD_PAGE_URL, data )
 		.then( function( response ) {
-			if ( coverImage != null && response.data != null ) {
-				const formData = new FormData();
-				formData.append('image', coverImage);
-				axios.post( BLOG_PAGE_API_ADD_COVER_IMAGE_URL + response.data.id, formData ).then();
-			}
+				if ( coverImage != null && response.data != null ) {
+					const formData = new FormData();
+					formData.append('image', coverImage);
+					axios.post( BLOG_PAGE_API_ADD_COVER_IMAGE_URL + response.data.id, formData ).then();
+				}
 			},
 		).catch(function( error ) {
 			alert(error)

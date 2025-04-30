@@ -39,7 +39,7 @@ export default {
       } );
     },
   },
-  created() {
+  mounted() {
     this.getBlogPages();
   },
 };
@@ -69,6 +69,6 @@ export default {
 
 .zoom:hover
   img
-    transform: scale(1.2);
+    transform: scale(1.1);
 
 </style>

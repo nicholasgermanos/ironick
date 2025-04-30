@@ -42,10 +42,7 @@ export default {
   name: 'MenuBar',
   methods: {
     isLoggedIn,
-    isLoggedOut,
-    forceUpdate() {
-      this.$forceUpdate();
-    }
+    isLoggedOut
   }
 };
 </script>
@@ -54,10 +51,11 @@ export default {
 .navbar
   button, span, a
     &:hover
-      color: $muted-sage-green;
-      border-color $muted-sage-green;
+      transform: scale(1.05);
+      color: $antique-white;
     &:focus
       color: $antique-white;
+    transition ease 0.2s
 
   background: $terracotta;
 

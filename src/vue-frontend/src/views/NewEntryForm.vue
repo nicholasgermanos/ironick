@@ -3,9 +3,9 @@
     <div class="m-4">
       <h1>New Blog Post</h1>
       <p>Please remember to back up your posts as we are still running in beta mode</p>
-      <input v-model="blogPost.title" placeholder="Title"/>
-      <input v-model="blogPost.subtitle" placeholder="Subtitle"/>
-      <input type="file" @change="uploadImage($event)"/>
+      <input required v-model="blogPost.title" placeholder="Title"/>
+      <input required v-model="blogPost.subtitle" placeholder="Subtitle"/>
+      <input required type="file" @change="uploadImage($event)"/>
       <output>
         <img id="image-preview" :src="previewUrl" v-if="previewUrl" alt="Cover Image Preview">
       </output>
