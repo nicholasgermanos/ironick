@@ -25,7 +25,7 @@ function update() {
 <style lang="stylus" scoped>
 .nick-checkbox
   background: $theme-white;
-  transform: scale(0.75)
+  transform: scale(0.65)
 
 .nick-checkbox input[type="checkbox"]
   display: none;

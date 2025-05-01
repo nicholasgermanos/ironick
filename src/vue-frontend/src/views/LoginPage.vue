@@ -62,5 +62,4 @@ button
 
   label
     background: $theme-white
-    margin-left: 3px;
 </style>
