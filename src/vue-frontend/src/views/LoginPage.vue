@@ -1,9 +1,15 @@
 <template>
-  <form @submit="submit" class="container blog-form m-3">
+  <form @submit.prevent="submit" class="container blog-form m-3">
     <div class="m-4">
       <h1>Welcome back</h1>
       <input v-model="user.email" placeholder="Email"/>
       <input type="password" v-model="user.password" placeholder="Password"/>
+      <table class="table remember-me">
+        <tr>
+          <td><NickCheckBox/></td>
+          <td><label>Remember me</label></td>
+        </tr>
+      </table>
       <button class="nick-button" type="submit" label="Login">Login</button>
     </div>
   </form>
@@ -12,15 +18,18 @@
 <script>
 import UserService from '@/services/userService';
 import router from '@/router';
+import NickCheckBox from '@/components/NickCheckBox.vue';
 
 export default {
   name: "LoginPage",
+  components: { NickCheckBox },
   data() {
     return {
       user: {
         email: null,
         password: null
-      }
+      },
+      rememberMe: false
     }
   },
   methods: {
@@ -35,8 +44,22 @@ export default {
 
 
 <style lang="stylus" scoped>
-
 button
-  margin-top: 20px;
+  margin: 40px 0 20px 0;
   width: 90%;
+
+// Remember me checkbox
+.remember-me
+  width: 100%;
+  margin-top: 30px;
+  display: block;
+
+  td
+    height 100%;
+
+  input
+    margin-top: 0;
+
+  label
+    background: $theme-white
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container bg-white w-100 p-0 pb-3 mt-3">
+  <div class="container blog-page w-100 p-0 pb-3 mt-3">
     <div class="w-100">
       <img :src="getCoverImage(blogPage)" class="card-img-top" alt="Cover Image">
     </div>
@@ -71,6 +71,10 @@ export default {
 p
   text-align: left
 
+.blog-page
+  position: relative;
+  background: $theme-white
+
 .article-header
   width: 90%
   margin-left: 5%
@@ -85,5 +89,8 @@ p
 
     .right
       text-align right
+
+.nick-button
+  margin: 0 10px 0 10px;
 
 </style>

@@ -50,20 +50,20 @@ export default {
 <style lang="stylus" scoped>
 .navbar
   .navbar-links
-    color: $theme-cream
+    color: $theme-white
     
   button, span, a
     &:hover
       transform: scale(1.05);
-      color: $theme-cream;
+      color: $theme-white;
     &:focus
-      color: $theme-cream;
+      color: $theme-white;
     transition ease 0.2s
 
   background: $theme-dark;
 
   .hamburger
-    border-color: $theme-cream;
+    border-color: $theme-white;
 
   .hamburger:focus
     box-shadow: none;

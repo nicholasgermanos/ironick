@@ -1,15 +1,9 @@
-// Colour scheme 1
-//$deep-slate-blue = #3D405B
-//$muted-sage-green = #81B29A
-//$antique-white = #F4F1DE
-//$antique-white-rusty = #eae7d4
-//$terracotta = #E07A5F
+//https://getcssscan.com/css-buttons-examples (button style)
 
 // Colour scheme 2
 $theme-dark = #222831
 $theme-grey-ish = #393E46
 $theme-brown = #948979
-$theme-cream = #DFD0B8
 $theme-white = #FAF9F6
 
 $grid-breakpoint-xs = 0
@@ -24,26 +18,32 @@ $grid-breakpoint-xxl = 1400px
   .newlines
     padding-top: 20px;
     padding-bottom: 20px;
+  
+  button
+    padding: 0.25em 0.75em;
 
 .nick-button
   // Button style
-  background: $theme-cream
-  border: $theme-brown
-  border-radius: 4px;
-  width: 100%;
-  height: 35px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $theme-grey-ish;
   cursor: pointer;
-  align-self: center;
-  margin-bottom: 10px;
-  box-shadow: 0 0 1px 1px;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0 0, 2px 2px 0 0, 3px 3px 0 0, 4px 4px 0 0, 5px 5px 0 0;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 
-  // Button text style
-  color: $theme-dark;
-  font-weight: bold;
+button:active
+  box-shadow: 0 0 0 0;
+  top: 5px;
+  left: 5px;
 
-.nick-button:hover
-  background: $theme-brown;
-  
 // Forms
 .blog-form
   width: fit-content;
@@ -58,7 +58,6 @@ $grid-breakpoint-xxl = 1400px
     border: 0;
     border-bottom: 1px solid $theme-grey-ish;
     font-size: 13px;
-    font-weight: 300;
     color: $theme-grey-ish;
     letter-spacing: 0.11em;
     background: $theme-white;
