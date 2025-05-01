@@ -4,9 +4,9 @@
       <h1>Welcome back</h1>
       <input v-model="user.email" placeholder="Email"/>
       <input type="password" v-model="user.password" placeholder="Password"/>
-      <table class="table remember-me">
+      <table class="remember-me">
         <tr>
-          <td><NickCheckBox/></td>
+          <td><NickCheckBox v-model="rememberMe"/></td>
           <td><label>Remember me</label></td>
         </tr>
       </table>
@@ -62,4 +62,5 @@ button
 
   label
     background: $theme-white
+    margin-left: 3px;
 </style>

@@ -1,8 +1,17 @@
 <!--https://getcssscan.com/css-checkboxes-examples-->
+<script setup>
+const model = defineModel()
+model.value = false;
+
+function update() {
+  model.value = model.value === false;
+}
+</script>
+
 <template>
   <div class="nick-checkbox">
     <label class="toggleButton">
-      <input type="checkbox"/>
+      <input v-on:click="update" type="checkbox"/>
       <div>
         <svg viewBox="0 0 44 44">
           <path d="M14,24 L21,31 L39.7428882,11.5937758 C35.2809627,6.53125861 30.0333333,4 24,4 C12.95,4 4,12.95 4,24 C4,35.05 12.95,44 24,44 C35.05,44 44,35.05 44,24 C44,19.3 42.5809627,15.1645919 39.7428882,11.5937758"
@@ -13,16 +22,10 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "NickCheckBox"
-}
-
-</script>
-
 <style lang="stylus" scoped>
 .nick-checkbox
   background: $theme-white;
+  transform: scale(0.75)
 
 .nick-checkbox input[type="checkbox"]
   display: none;
@@ -85,14 +88,14 @@ export default {
 .nick-checkbox .toggleButton input + div:before
   opacity: 0;
   transform: scale(0.3) translate(-50%, -50%) rotate(45deg);
-  -webkit-animation: bounceInBefore-44 0.3s linear forwards 0.3s;
-  animation: bounceInBefore-44 0.3s linear forwards 0.3s;
+  -webkit-animation: bounceInBefore 0.3s linear forwards 0.3s;
+  animation: bounceInBefore 0.3s linear forwards 0.3s;
 
 .nick-checkbox .toggleButton input + div:after
   opacity: 0;
   transform: scale(0.3) translate(-50%, -50%) rotate(-45deg);
-  -webkit-animation: bounceInAfter-44 0.3s linear forwards 0.3s;
-  animation: bounceInAfter-44 0.3s linear forwards 0.3s;
+  -webkit-animation: bounceInAfter 0.3s linear forwards 0.3s;
+  animation: bounceInAfter 0.3s linear forwards 0.3s;
 
 .nick-checkbox .toggleButton input:checked + div svg
   stroke-dashoffset: 162.6;
@@ -102,17 +105,17 @@ export default {
 .nick-checkbox .toggleButton input:checked + div:before
   opacity: 0;
   transform: scale(0.3) translate(-50%, -50%) rotate(45deg);
-  -webkit-animation: bounceInBeforeDont-44 0.3s linear forwards 0s;
-  animation: bounceInBeforeDont-44 0.3s linear forwards 0s;
+  -webkit-animation: bounceInBeforeDont 0.3s linear forwards 0s;
+  animation: bounceInBeforeDont 0.3s linear forwards 0s;
 
 .nick-checkbox .toggleButton input:checked + div:after
   opacity: 0;
   transform: scale(0.3) translate(-50%, -50%) rotate(-45deg);
-  -webkit-animation: bounceInAfterDont-44 0.3s linear forwards 0s;
-  animation: bounceInAfterDont-44 0.3s linear forwards 0s;
+  -webkit-animation: bounceInAfterDont 0.3s linear forwards 0s;
+  animation: bounceInAfterDont 0.3s linear forwards 0s;
 
 
-@-webkit-keyframes bounceInBefore-44
+@-webkit-keyframes bounceInBefore
   0%
     opacity: 0;
     transform: scale(0.3) translate(-50%, -50%) rotate(45deg);
@@ -131,7 +134,7 @@ export default {
 
 
 
-@keyframes bounceInBefore-44
+@keyframes bounceInBefore
   0%
     opacity: 0;
     transform: scale(0.3) translate(-50%, -50%) rotate(45deg);
@@ -149,7 +152,7 @@ export default {
     transform: scale(1) translate(-50%, -50%) rotate(45deg);
 
 
-@-webkit-keyframes bounceInAfter-44
+@-webkit-keyframes bounceInAfter
   0%
     opacity: 0;
     transform: scale(0.3) translate(-50%, -50%) rotate(-45deg);
@@ -167,7 +170,7 @@ export default {
     transform: scale(1) translate(-50%, -50%) rotate(-45deg);
 
 
-@keyframes bounceInAfter-44
+@keyframes bounceInAfter
   0%
     opacity: 0;
     transform: scale(0.3) translate(-50%, -50%) rotate(-45deg);
@@ -185,7 +188,7 @@ export default {
     transform: scale(1) translate(-50%, -50%) rotate(-45deg);
 
 
-@-webkit-keyframes bounceInBeforeDont-44
+@-webkit-keyframes bounceInBeforeDont
   0%
     opacity: 1;
     transform: scale(1) translate(-50%, -50%) rotate(45deg);
@@ -195,7 +198,7 @@ export default {
     transform: scale(0.3) translate(-50%, -50%) rotate(45deg);
 
 
-@keyframes bounceInBeforeDont-44
+@keyframes bounceInBeforeDont
   0%
     opacity: 1;
     transform: scale(1) translate(-50%, -50%) rotate(45deg);
@@ -205,7 +208,7 @@ export default {
     transform: scale(0.3) translate(-50%, -50%) rotate(45deg);
 
 
-@-webkit-keyframes bounceInAfterDont-44
+@-webkit-keyframes bounceInAfterDont
   0%
     opacity: 1;
     transform: scale(1) translate(-50%, -50%) rotate(-45deg);
@@ -215,7 +218,7 @@ export default {
     transform: scale(0.3) translate(-50%, -50%) rotate(-45deg);
 
 
-@keyframes bounceInAfterDont-44
+@keyframes bounceInAfterDont
   0%
     opacity: 1;
     transform: scale(1) translate(-50%, -50%) rotate(-45deg);
