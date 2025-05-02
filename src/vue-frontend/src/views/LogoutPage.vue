@@ -10,7 +10,6 @@
     name: "LogoutPage",
     created() {
       UserService.logout()
-      this.$emit("logout-success")
       router.push("/")
     }
   }

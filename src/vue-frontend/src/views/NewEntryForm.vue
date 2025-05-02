@@ -1,5 +1,5 @@
 <template>
-  <form @submit="submit" class="container blog-form m-3">
+  <form @submit="submit" class="container blog-form">
     <div class="m-4">
       <h1>New Blog Post</h1>
       <p>Please remember to back up your posts as we are still running in beta mode</p>

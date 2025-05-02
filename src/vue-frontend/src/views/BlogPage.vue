@@ -18,7 +18,7 @@
 
       <div v-if="isAdmin()" class="text-center">
         <button class="nick-button" v-on:click="deleteBlogPage(blogPage)"><i class="fa-solid fa-trash"></i> Delete</button>
-        <button class="nick-button" v-on:click="deleteBlogPage(blogPage)"><i class="fa-solid fa-pencil"></i> Edit</button>
+        <button class="nick-button" v-on:click="editBlogPage(blogPage)"><i class="fa-solid fa-pencil"></i> Edit</button>
       </div>
     </div>
   </div>
@@ -49,6 +49,12 @@ export default {
     isAdmin,
     getCoverImage,
     deleteBlogPage( blogPage ) {
+      if ( blogPage !== null && confirm( 'Are you sure?' ) ) {
+        BlogPageService.deleteBlogPage( blogPage.id );
+        this.$router.push( '/' );
+      }
+    },
+    editBlogPage( blogPage ) {
       if ( blogPage !== null && confirm( 'Are you sure?' ) ) {
         BlogPageService.deleteBlogPage( blogPage.id );
         this.$router.push( '/' );

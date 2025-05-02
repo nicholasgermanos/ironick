@@ -1,17 +1,20 @@
 <template>
   <div class="container p-5 flex-wrap">
     <div class="d-flex flex-wrap justify-content-center">
-      <div class="card zoom" v-for="blogEntry of blogEntries" v-bind:key="blogEntry.id">
-        <div class="preview-cover-image">
-          <img :src="getCoverImage(blogEntry)" class="card-img-top" alt="Cover Image">
-        </div>
-        <div class="card-body">
-          <div class="card-headers">
-            <h5 class="funky">{{ blogEntry.title }}</h5>
-            <p>{{ blogEntry.subtitle }}</p>
+      <div v-for="blogEntry of blogEntries" v-bind:key="blogEntry.id">
+        <h1 v-if="blogEntry.id === firstBlogEntry">Latest Posts</h1>
+        <div class="card zoom">
+          <div class="preview-cover-image">
+            <img :src="getCoverImage(blogEntry)" class="card-img-top" alt="Cover Image">
           </div>
-          <div class="card-read-button">
-            <router-link v-if="blogEntry.id" :to="{name: 'blog', params: {blogID: blogEntry.id}}" class="w-full"><button class="nick-button">Read<span class="arrow fa-solid fa-arrow-right"/></button></router-link>
+          <div class="card-body">
+            <div class="card-headers">
+              <h5 class="funky">{{ blogEntry.title }}</h5>
+              <p>{{ blogEntry.subtitle }}</p>
+            </div>
+            <div class="card-read-button">
+              <router-link v-if="blogEntry.id" :to="{name: 'blog', params: {blogID: blogEntry.id}}" class="w-full"><button class="nick-button">Read<span class="arrow fa-solid fa-arrow-right"/></button></router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -22,6 +25,7 @@
 <script>
 import { getCoverImage } from '@/utils/blogPageUtils';
 import BlogPageService from '@/services/blogPageService';
+import { isEmpty } from '@/utils/utils';
 
 export default {
   name: 'BlogEntries',
@@ -29,13 +33,17 @@ export default {
   data() {
     return {
       blogEntries: [],
+      firstBlogEntry: 0
     };
   },
   methods: {
     getCoverImage,
     getBlogPages() {
       BlogPageService.getBlogPages().then( ( response ) => {
-        this.blogEntries = response.data;
+        if (isEmpty(response.data) !== true) {
+          this.blogEntries = response.data;
+          this.firstBlogEntry = this.blogEntries[0].id;
+        }
       } );
     },
   },
@@ -46,6 +54,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+h1
+  color: $theme-white;
+  text-align: left;
+  position: absolute;
+  top: 97px;
+
 // Main card
 .card
   margin: 10px 10px 10px 10px;

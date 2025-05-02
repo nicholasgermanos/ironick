@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit" class="container blog-form m-3">
+  <form @submit.prevent="submit" class="container blog-form">
     <div class="m-4">
       <h1>Hi, nice to meet you</h1>
       <input v-model="user.firstName" placeholder="First Name"/>
