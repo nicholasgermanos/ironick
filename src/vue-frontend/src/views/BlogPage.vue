@@ -19,7 +19,7 @@
       <div v-if="isAdmin()" class="text-center admin-section">
         <button class="nick-button" v-on:click="deleteBlogPage()"><i class="fa-solid fa-trash"></i> Delete</button>
         <button class="nick-button" v-on:click="editBlogPage()"><i class="fa-solid fa-pencil"></i> Edit</button>
-        <NickCheckBox v-model="blogPage.featured" v-on:update:model-value="toggleFeatured()" checkbox-label="Featured" :on-load-value="blogPage.featured"/>
+        <NickCheckBox v-model="blogPage.featured" checkbox-label="Featured" :on-load-value="blogPage.featured"/>
       </div>
     </div>
   </div>
@@ -48,6 +48,15 @@ export default {
                                                             }
     );
   },
+  watch: {
+    'blogPage.featured': function() {
+      if (this.blogPage.featured === true ) {
+        BlogPageService.featureBlogPage(this.blogPage.id)
+      } else {
+        BlogPageService.unFeatureBlogPage(this.blogPage.id);
+      }
+    }
+  },
   methods: {
     isAdmin,
     getCoverImage,
@@ -61,13 +70,6 @@ export default {
       if ( this.blogPage !== null && confirm( 'Are you sure?' ) ) {
         BlogPageService.deleteBlogPage( this.blogPage.id );
         this.$router.push( '/' );
-      }
-    },
-    toggleFeatured() {
-      if (this.blogPage.featured === true ) {
-        BlogPageService.unFeatureBlogPage(this.blogPage.id)
-      } else {
-        BlogPageService.featureBlogPage(this.blogPage.id);
       }
     },
     getDate() {
