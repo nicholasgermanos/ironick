@@ -20,6 +20,7 @@ public class BlogPage {
 	private long timestamp;
 	private String title;
 	private String subtitle;
+	private boolean featured;
 
 	@Column(length = 100000)
 	private String body;

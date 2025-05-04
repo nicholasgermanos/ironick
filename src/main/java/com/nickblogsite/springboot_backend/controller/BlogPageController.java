@@ -11,31 +11,59 @@ import lombok.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api")
+@RequestMapping( "/api" )
 public class BlogPageController {
 
 	private final BlogPageRepository blogPageRepository;
 
-	@GetMapping("/blogPage")
+	@GetMapping( "/blogPage" )
 	public List<BlogPage> fetchBlogs() {
 		final List<BlogPage> blogPages = blogPageRepository.findAll();
 		blogPages.sort( Comparator.comparingLong( BlogPage::getId ).reversed() );
 		return blogPages;
 	}
 
-	@PostMapping("/addBlogPage")
+	@GetMapping( "/blogPagesFeatured" )
+	public List<BlogPage> fetchBlogsFeatured() {
+		final List<BlogPage> blogPages = blogPageRepository.getFeaturedBlogPages();
+		blogPages.sort( Comparator.comparingLong( BlogPage::getId ).reversed() );
+		return blogPages;
+	}
+
+	@GetMapping( "/blogPagesUnFeatured" )
+	public List<BlogPage> fetchBlogsUnFeatured() {
+		final List<BlogPage> blogPages = blogPageRepository.getUnFeaturedBlogPages();
+		blogPages.sort( Comparator.comparingLong( BlogPage::getId ).reversed() );
+		return blogPages;
+	}
+
+	@PostMapping( "/addBlogPage" )
 	@ResponseBody
 	public BlogPage addBlogPage( @RequestBody final BlogPage newBlogPage ) {
 		return blogPageRepository.save( newBlogPage );
 	}
 
-	@PostMapping("/deleteBlogPage/{id}")
-	public void deleteBlogPage( @PathVariable("id") final String id ) {
+	@PostMapping( "/deleteBlogPage/{id}" )
+	public void deleteBlogPage( @PathVariable( "id" ) final String id ) {
 		blogPageRepository.deleteById( Long.parseLong( id ) );
 	}
 
-	@GetMapping("/getBlogPage/{id}")
-	public BlogPage getBlogPage(@PathVariable("id") final String id ) {
+	@GetMapping( "/getBlogPage/{id}" )
+	public BlogPage getBlogPage( @PathVariable( "id" ) final String id ) {
 		return blogPageRepository.findById( Long.parseLong( id ) ).orElse( null );
+	}
+
+	@PostMapping( "/markBlogPageFeatured/{id}" )
+	public void markBlogPageFeatured( @PathVariable( "id" ) final String id ) {
+		final BlogPage blogPage = blogPageRepository.getReferenceById( Long.parseLong( id ) );
+		blogPage.setFeatured( true );
+		blogPageRepository.save( blogPage );
+	}
+
+	@PostMapping( "/markBlogPageNotFeatured/{id}" )
+	public void markBlogPageNotFeatured( @PathVariable( "id" ) final String id ) {
+		final BlogPage blogPage = blogPageRepository.getReferenceById( Long.parseLong( id ) );
+		blogPage.setFeatured( false );
+		blogPageRepository.save( blogPage );
 	}
 }

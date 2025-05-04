@@ -1,5 +1,6 @@
 <template>
-  <BlogEntries/>
+  <BlogEntries section-header="Featured Posts" featured/>
+  <BlogEntries section-header="More Posts" un-featured/>
 </template>
 
 <script>

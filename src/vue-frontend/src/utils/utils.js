@@ -1,5 +1,5 @@
 export function isEmpty(object) {
-	return object === null || object === undefined;
+	return object === null || object === undefined || object.length === 0;
 }
 
 export function isEmptyCascade(object, list) {

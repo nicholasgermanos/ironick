@@ -6,7 +6,7 @@
     <div class="article-header">
       <hr/>
       <div class="article-metadata">
-        <p class="left">{{ getDate( blogPage ) }}</p>
+        <p class="left">{{ getDate() }}</p>
         <p class="right">by Nicholas Germanos</p>
       </div>
       <hr/>
@@ -16,9 +16,10 @@
       <h4 class="fst-italic fw-light">{{ blogPage.subtitle }}</h4>
       <div class="ql-editor" v-html="blogPage.body"/>
 
-      <div v-if="isAdmin()" class="text-center">
-        <button class="nick-button" v-on:click="deleteBlogPage(blogPage)"><i class="fa-solid fa-trash"></i> Delete</button>
-        <button class="nick-button" v-on:click="editBlogPage(blogPage)"><i class="fa-solid fa-pencil"></i> Edit</button>
+      <div v-if="isAdmin()" class="text-center admin-section">
+        <button class="nick-button" v-on:click="deleteBlogPage()"><i class="fa-solid fa-trash"></i> Delete</button>
+        <button class="nick-button" v-on:click="editBlogPage()"><i class="fa-solid fa-pencil"></i> Edit</button>
+        <NickCheckBox v-on:click="toggleFeatured()" checkbox-label="Featured" :on-load-value="blogPage.featured"/>
       </div>
     </div>
   </div>
@@ -28,9 +29,11 @@
 import { getCoverImage } from '@/utils/blogPageUtils';
 import BlogPageService from '@/services/blogPageService';
 import { isAdmin } from '@/utils/localStorageUtils';
+import NickCheckBox from '@/components/NickCheckBox.vue';
 
 export default {
   name: 'BlogPage',
+  components: { NickCheckBox },
   data() {
     return {
       blogPage: null
@@ -48,21 +51,28 @@ export default {
   methods: {
     isAdmin,
     getCoverImage,
-    deleteBlogPage( blogPage ) {
-      if ( blogPage !== null && confirm( 'Are you sure?' ) ) {
-        BlogPageService.deleteBlogPage( blogPage.id );
+    deleteBlogPage() {
+      if ( this.blogPage !== null && confirm( 'Are you sure?' ) ) {
+        BlogPageService.deleteBlogPage( this.blogPage.id );
         this.$router.push( '/' );
       }
     },
-    editBlogPage( blogPage ) {
-      if ( blogPage !== null && confirm( 'Are you sure?' ) ) {
-        BlogPageService.deleteBlogPage( blogPage.id );
+    editBlogPage() {
+      if ( this.blogPage !== null && confirm( 'Are you sure?' ) ) {
+        BlogPageService.deleteBlogPage( this.blogPage.id );
         this.$router.push( '/' );
       }
     },
-    getDate( blogPage ) {
-      if ( blogPage !== null ) {
-        const timestamp = blogPage.timestamp;
+    toggleFeatured() {
+      if (this.blogPage.featured === true ) {
+        BlogPageService.unFeatureBlogPage(this.blogPage.id)
+      } else {
+        BlogPageService.featureBlogPage(this.blogPage.id);
+      }
+    },
+    getDate() {
+      if ( this.blogPage !== null ) {
+        const timestamp = this.blogPage.timestamp;
         const date = new Date( timestamp );
 
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -99,4 +109,7 @@ p
 .nick-button
   margin: 0 10px 0 10px;
 
+.admin-section
+  display: inline-flex;
+  margin-top: 30px;
 </style>

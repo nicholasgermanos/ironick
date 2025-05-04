@@ -5,12 +5,7 @@
       <h6>(login below)</h6>
       <input v-model="user.email" placeholder="Email"/>
       <input type="password" v-model="user.password" placeholder="Password"/>
-      <table class="remember-me">
-        <tr>
-          <td><NickCheckBox v-model="rememberMe"/></td>
-          <td><label>Remember me</label></td>
-        </tr>
-      </table>
+      <NickCheckBox v-model="rememberMe" checkbox-label="Remember me"/>
       <button class="nick-button" type="submit" label="Login">Login</button>
     </div>
   </form>
@@ -61,7 +56,4 @@ h6
 
   input
     margin-top: 0;
-
-  label
-    background: $theme-white
 </style>

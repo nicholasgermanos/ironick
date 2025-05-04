@@ -2,8 +2,8 @@
   <div class="container p-5 flex-wrap">
     <div class="d-flex flex-wrap justify-content-center">
       <div v-for="blogEntry of blogEntries" v-bind:key="blogEntry.id">
-        <h1 v-if="blogEntry.id === firstBlogEntry">Latest Posts</h1>
-        <div class="card zoom">
+        <h1 v-if="isFirstCard(blogEntry.id)">{{ sectionHeader }}</h1>
+        <div :class="isFirstCard(blogEntry.id) ? 'first-card' : ''" class="card zoom">
           <div class="preview-cover-image">
             <img :src="getCoverImage(blogEntry)" class="card-img-top" alt="Cover Image">
           </div>
@@ -13,7 +13,9 @@
               <p>{{ blogEntry.subtitle }}</p>
             </div>
             <div class="card-read-button">
-              <router-link v-if="blogEntry.id" :to="{name: 'blog', params: {blogID: blogEntry.id}}" class="w-full"><button class="nick-button">Read<span class="arrow fa-solid fa-arrow-right"/></button></router-link>
+              <router-link v-if="blogEntry.id" :to="{name: 'blog', params: {blogID: blogEntry.id}}" class="w-full">
+                <button class="nick-button">Read<span class="arrow fa-solid fa-arrow-right"/></button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -36,20 +38,31 @@ export default {
       firstBlogEntry: 0
     };
   },
+  props: {
+    sectionHeader: {
+      type: String,
+      default: 'Articles'
+    },
+    featured: Boolean,
+    unFeatured: Boolean
+  },
   methods: {
     getCoverImage,
     getBlogPages() {
-      BlogPageService.getBlogPages().then( ( response ) => {
-        if (isEmpty(response.data) !== true) {
+      BlogPageService.getBlogPages( this.featured, this.unFeatured ).then( ( response ) => {
+        if ( isEmpty( response.data ) !== true ) {
           this.blogEntries = response.data;
-          this.firstBlogEntry = this.blogEntries[0].id;
+          this.firstBlogEntry = this.blogEntries[ 0 ].id;
         }
       } );
     },
+    isFirstCard( id ) {
+      return id === this.firstBlogEntry;
+    }
   },
   mounted() {
     this.getBlogPages();
-  },
+  }
 };
 </script>
 
@@ -57,8 +70,12 @@ export default {
 h1
   color: $theme-white;
   text-align: left;
-  position: absolute;
-  top: 97px;
+  position: relative;
+  top: -45px;
+
+// Special styling for the first card to make the binding of the header always work
+.first-card
+  top: -48px;
 
 // Main card
 .card
@@ -76,6 +93,7 @@ h1
   height 50%;
   min-height: 50%;
   overflow: hidden;
+
 img
   height: 100%;
 
