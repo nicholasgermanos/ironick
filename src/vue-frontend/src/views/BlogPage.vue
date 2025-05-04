@@ -19,7 +19,7 @@
       <div v-if="isAdmin()" class="text-center admin-section">
         <button class="nick-button" v-on:click="deleteBlogPage()"><i class="fa-solid fa-trash"></i> Delete</button>
         <button class="nick-button" v-on:click="editBlogPage()"><i class="fa-solid fa-pencil"></i> Edit</button>
-        <NickCheckBox v-on:click="toggleFeatured()" checkbox-label="Featured" :on-load-value="blogPage.featured"/>
+        <NickCheckBox v-model="blogPage.featured" v-on:update:model-value="toggleFeatured()" checkbox-label="Featured" :on-load-value="blogPage.featured"/>
       </div>
     </div>
   </div>
