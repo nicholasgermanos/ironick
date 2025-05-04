@@ -2,8 +2,8 @@
   <div class="container p-5 flex-wrap">
     <div class="d-flex flex-wrap justify-content-center">
       <div v-for="blogEntry of blogEntries" v-bind:key="blogEntry.id">
-        <h1 v-if="isFirstCard(blogEntry.id)">{{ sectionHeader }}</h1>
-        <div :class="isFirstCard(blogEntry.id) ? 'first-card' : ''" class="card zoom">
+        <div class="card zoom">
+          <h1 v-if="isFirstCard(blogEntry.id)">{{ sectionHeader }}</h1>
           <div class="preview-cover-image">
             <img :src="getCoverImage(blogEntry)" class="card-img-top" alt="Cover Image">
           </div>
@@ -70,12 +70,8 @@ export default {
 h1
   color: $theme-white;
   text-align: left;
-  position: relative;
-  top: -45px;
-
-// Special styling for the first card to make the binding of the header always work
-.first-card
-  top: -48px;
+  position: absolute;
+  top: -55px;
 
 // Main card
 .card
@@ -83,10 +79,10 @@ h1
   border: none;
   width: 18rem;
   height: 22rem;
-  overflow: hidden;
 
 .card-body
   background: $theme-white;
+  border-radius: 0 0 10px 10px;
 
 // Cover images
 .preview-cover-image
