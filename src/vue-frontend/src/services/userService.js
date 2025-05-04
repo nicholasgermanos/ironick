@@ -13,7 +13,7 @@ class UserService {
 	login(user) {
 		axios.post(USER_API_LOGIN_URL, user).then(response => {
 			if (isEmptyCascade(response, ['data', 'principal', 'user', 'role']) === false ) {
-				localStorage.setItem('user', response.data.principal.user );
+				localStorage.setItem('user', JSON.stringify(response.data.principal.user) );
 				localStorage.setItem('role', response.data.principal.user.role );
 			}
 		}).catch(error => {

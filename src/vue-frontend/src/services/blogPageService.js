@@ -4,9 +4,9 @@ import axios from 'axios';
 const BLOG_PAGE_API_BASE_URL = 'http://localhost:8080/api/blogPage';
 const BLOG_PAGE_API_GET_FEATURED_URL = 'http://localhost:8080/api/blogPagesFeatured';
 const BLOG_PAGE_API_GET_UN_FEATURED_URL = 'http://localhost:8080/api/blogPagesUnFeatured';
-const BLOG_PAGE_API_ADD_PAGE_URL = 'http://localhost:8080/api/addBlogPage';
 
 // Trailing slashes here for appending
+const BLOG_PAGE_API_ADD_PAGE_URL = 'http://localhost:8080/api/addBlogPage/';
 const BLOG_PAGE_API_GET_PAGE_URL = 'http://localhost:8080/api/getBlogPage/';
 const BLOG_PAGE_API_DELETE_PAGE_URL = 'http://localhost:8080/api/deleteBlogPage/';
 const BLOG_PAGE_API_ADD_COVER_IMAGE_URL = 'http://localhost:8080/api/addCoverImage/';
@@ -34,9 +34,9 @@ class BlogPageService {
 		return axios.get( BLOG_PAGE_API_GET_UN_FEATURED_URL );
 	}
 
-	addBlogPage( data, coverImage ) {
+	addBlogPage( data, userID, coverImage ) {
 
-		axios.post( BLOG_PAGE_API_ADD_PAGE_URL, data )
+		axios.post( BLOG_PAGE_API_ADD_PAGE_URL + userID, data )
 		.then( function( response ) {
 				if ( coverImage != null && response.data != null ) {
 					const formData = new FormData();

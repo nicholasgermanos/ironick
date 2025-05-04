@@ -29,4 +29,9 @@ public class BlogPage {
 	@OneToOne(mappedBy = "blogPage", cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private CoverImage coverImage;
+
+	@ManyToOne
+	@JsonIgnoreProperties("blogPages")
+	@JoinColumn(name="user_id", nullable = false)
+	private User user;
 }

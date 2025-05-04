@@ -1,5 +1,7 @@
 package com.nickblogsite.springboot_backend.entity;
 
+import java.util.*;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="users")
+@Table(name="user")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +25,7 @@ public class User {
 	private String email;
 	private String password;
 	private String role;
+
+	@OneToMany(mappedBy = "user")
+	private Set<BlogPage> blogPages;
 }

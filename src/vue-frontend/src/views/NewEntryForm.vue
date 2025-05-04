@@ -21,6 +21,7 @@
 import BlogPageService from '@/services/blogPageService';
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import { getLoggedInID } from '@/utils/localStorageUtils';
 
 export default {
   name: 'NewEntryForm',
@@ -53,8 +54,10 @@ export default {
         title: '',
         subtitle: '',
         body: '',
-        timestamp: null
+        timestamp: null,
+        featured: false
       },
+      userID: getLoggedInID(),
       coverImage: null,
       previewUrl: null,
       toolbarOptions
@@ -63,7 +66,7 @@ export default {
   methods: {
     submit: function(/*event*/) {
       this.$data.blogPost.timestamp = Date.now()
-      BlogPageService.addBlogPage( this.$data.blogPost, this.coverImage );
+      BlogPageService.addBlogPage( this.blogPost, this.userID, this.coverImage );
       this.$router.push('/')
     },
     uploadImage( event ) {

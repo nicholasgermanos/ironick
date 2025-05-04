@@ -1,5 +1,5 @@
 <template>
-  <div class="container blog-page w-100 p-0 pb-3 mt-3">
+  <div v-if="blogPage" class="container blog-page w-100 p-0 pb-3 mt-3">
     <div class="w-100">
       <img :src="getCoverImage(blogPage)" class="card-img-top" alt="Cover Image">
     </div>
@@ -7,7 +7,7 @@
       <hr/>
       <div class="article-metadata">
         <p class="left">{{ getDate() }}</p>
-        <p class="right">by Nicholas Germanos</p>
+        <p class="right">by {{ blogPage.user.firstName }} {{ blogPage.user.lastName }}</p>
       </div>
       <hr/>
     </div>
@@ -50,10 +50,10 @@ export default {
   },
   watch: {
     'blogPage.featured': function() {
-      if (this.blogPage.featured === true ) {
-        BlogPageService.featureBlogPage(this.blogPage.id)
+      if ( this.blogPage.featured === true ) {
+        BlogPageService.featureBlogPage( this.blogPage.id );
       } else {
-        BlogPageService.unFeatureBlogPage(this.blogPage.id);
+        BlogPageService.unFeatureBlogPage( this.blogPage.id );
       }
     }
   },

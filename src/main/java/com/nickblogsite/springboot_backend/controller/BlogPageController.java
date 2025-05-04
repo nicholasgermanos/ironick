@@ -15,6 +15,7 @@ import lombok.*;
 public class BlogPageController {
 
 	private final BlogPageRepository blogPageRepository;
+	private final UserRepository userRepository;
 
 	@GetMapping( "/blogPage" )
 	public List<BlogPage> fetchBlogs() {
@@ -37,9 +38,10 @@ public class BlogPageController {
 		return blogPages;
 	}
 
-	@PostMapping( "/addBlogPage" )
+	@PostMapping( "/addBlogPage/{userID}" )
 	@ResponseBody
-	public BlogPage addBlogPage( @RequestBody final BlogPage newBlogPage ) {
+	public BlogPage addBlogPage( @PathVariable( "userID" ) final String userID, @RequestBody final BlogPage newBlogPage ) {
+		newBlogPage.setUser( userRepository.findById( Long.parseLong( userID ) ).orElse( null ) );
 		return blogPageRepository.save( newBlogPage );
 	}
 
