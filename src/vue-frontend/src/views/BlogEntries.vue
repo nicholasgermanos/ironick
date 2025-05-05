@@ -112,6 +112,8 @@ img
 // Buttons
 .card-read-button
   height: 40%;
+  text-align: right;
+  margin-right: 10px;
 
 .arrow
   margin-left: 3px;

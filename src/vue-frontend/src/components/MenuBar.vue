@@ -2,7 +2,7 @@
   <div class="menu-bar">
     <nav class="navbar navbar-expand-sm fixed-top">
       <div class="container">
-        <router-link to="/" role="button" class="fw-bold navbar-brand navbar-links">NickBlog</router-link>
+        <router-link to="/" role="button" class="fw-bold navbar-brand navbar-links">Ironick</router-link>
         <button class="hamburger navbar-links navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
                 aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="fa-solid fa-bars"></span>
