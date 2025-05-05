@@ -18,7 +18,9 @@
 
       <div v-if="isAdmin()" class="text-center admin-section">
         <button class="nick-button" v-on:click="deleteBlogPage()"><i class="fa-solid fa-trash"></i> Delete</button>
-        <button class="nick-button" v-on:click="editBlogPage()"><i class="fa-solid fa-pencil"></i> Edit</button>
+        <router-link :to="{name: 'newEntryForm', params: {blogID: blogPage.id}}">
+          <button class="nick-button"><i class="fa-solid fa-pencil"></i> Edit</button>
+        </router-link>
         <NickCheckBox v-model="blogPage.featured" checkbox-label="Featured" :on-load-value="blogPage.featured"/>
       </div>
     </div>
@@ -61,12 +63,6 @@ export default {
     isAdmin,
     getCoverImage,
     deleteBlogPage() {
-      if ( this.blogPage !== null && confirm( 'Are you sure?' ) ) {
-        BlogPageService.deleteBlogPage( this.blogPage.id );
-        this.$router.push( '/' );
-      }
-    },
-    editBlogPage() {
       if ( this.blogPage !== null && confirm( 'Are you sure?' ) ) {
         BlogPageService.deleteBlogPage( this.blogPage.id );
         this.$router.push( '/' );

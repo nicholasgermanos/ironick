@@ -51,6 +51,7 @@ export default {
 
     return {
       blogPost: {
+        id: null,
         title: '',
         subtitle: '',
         body: '',
@@ -62,6 +63,15 @@ export default {
       previewUrl: null,
       toolbarOptions
     };
+  },
+  props: {
+    blogID: String
+  },
+  beforeMount() {
+    BlogPageService.getBlogPage( this.$props.blogID ).then( response => {
+                                                              this.blogPost = response.data;
+                                                            }
+    );
   },
   methods: {
     submit: function(/*event*/) {
