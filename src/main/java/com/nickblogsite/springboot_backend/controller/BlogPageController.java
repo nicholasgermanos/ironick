@@ -52,7 +52,11 @@ public class BlogPageController {
 
 	@GetMapping( "/getBlogPage/{id}" )
 	public BlogPage getBlogPage( @PathVariable( "id" ) final String id ) {
-		return blogPageRepository.findById( Long.parseLong( id ) ).orElse( null );
+		try {
+			return blogPageRepository.findById( Long.parseLong( id ) ).orElse( null );
+		} catch ( final NumberFormatException e ) {
+			return new BlogPage();
+		}
 	}
 
 	@PostMapping( "/markBlogPageFeatured/{id}" )

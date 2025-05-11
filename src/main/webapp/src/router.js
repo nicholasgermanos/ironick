@@ -13,7 +13,8 @@ const routes = [
 	{ name: 'login', path: '/login', component: LoginPage },
 	{ name: 'logout', path: '/logout', component: LogoutPage },
 	{ name: 'register', path: '/register', component: RegisterPage },
-	{ name: 'newEntryForm', path: '/newEntryForm/:blogID', component: NewEntryForm, props: true },
+	{ name: 'entryFormNew', path: '/newEntryForm', component: NewEntryForm, props: true },
+	{ name: 'entryFormEdit', path: '/newEntryForm/:blogID', component: NewEntryForm, props: true },
 	{ name: 'blogs', path: '/blogs', component: BlogEntries },
 	{ name: 'blog', path: '/blog/:blogID', component: BlogPage, props: true }
 ];

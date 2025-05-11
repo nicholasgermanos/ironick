@@ -12,7 +12,8 @@
 	<artifactId>nickblog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springboot-backend</name>
-	<description>Nick&apos;s Blog Site</description>
+	<packaging>war</packaging>
+	<description>Ironick</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -27,7 +28,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>24</java.version>
+		<java.version>21</java.version>
 		<node.version>v22.14.0</node.version>
 		<npm.version>10.9.2</npm.version>
 	</properties>
@@ -68,6 +69,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
     </dependencies>
 
 	<build>
@@ -115,7 +122,7 @@
 				</executions>
 				<configuration>
 					<nodeVersion>${node.version}</nodeVersion>
-					<workingDirectory>src/vue-frontend</workingDirectory>
+					<workingDirectory>src/main/webapp</workingDirectory>
 				</configuration>
 			</plugin>
 
@@ -167,6 +174,15 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.1</version>
+				<configuration>
+					<warName>site</warName>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -2,9 +2,11 @@ import axios from 'axios'
 import router from '@/router';
 import { isEmpty, isEmptyCascade } from '@/utils/utils';
 
-const USER_API_BASE_URL = 'http://localhost:8080/api/users'
-const USER_API_LOGIN_URL = 'http://localhost:8080/api/login'
-const USER_API_REGISTER_URL = 'http://localhost:8080/api/register'
+axios.defaults.baseURL = '/api/';
+
+const USER_API_BASE_URL = 'users'
+const USER_API_LOGIN_URL = 'login'
+const USER_API_REGISTER_URL = 'register'
 
 class UserService {
 	getUsers() {

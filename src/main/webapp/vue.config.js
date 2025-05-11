@@ -17,7 +17,9 @@ module.exports = {
 				changeOrigin: true
 			}
 		}
-	}
+	},
+	publicPath:
+		process.env.NODE_ENV === 'production' ? '/site/dist/' : '/',
 };
 
 function addStyleResource( rule ) {

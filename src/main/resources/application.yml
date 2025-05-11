@@ -1,24 +1,31 @@
 spring:
-    application:
-        name: springboot-backend
-    datasource:
-        password: password
-        url: jdbc:mariadb://localhost:3306/nickblog?useSSL=false
-        username: nickbloguser
-    jpa:
-        hibernate:
-            ddl-auto: update
+  application:
+    name: springboot-backend
+  datasource:
+    password: ${SPRING_DATASOURCE_PASSWORD:password}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mariadb://localhost:3306/ironick_main?useSSL=false}
+    username: ${SPRING_DATASOURCE_USERNAME:ironick_backend_u}
+  jpa:
+    hibernate:
+      ddl-auto: update
 
 server:
+  tomcat:
+    accesslog:
+      enabled: true
   error:
-      include-message: always
-      include-binding-errors: always
+    include-message: always
+    include-binding-errors: always
 
 logging:
-    level:
-        org:
-            springframework:
-                security:
-                    web:
-                        csrf:
-                            CsrfFilter: DEBUG
+  level:
+    org:
+      springframework:
+        security:
+          web:
+            csrf:
+              CsrfFilter: DEBUG
+      apache:
+        tomcat:
+          DEBUG
+        catalina: DEBUG

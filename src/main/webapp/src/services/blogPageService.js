@@ -1,17 +1,19 @@
 import axios from 'axios';
 
+axios.defaults.baseURL = '/api/';
+
 // No trailing slashes here
-const BLOG_PAGE_API_BASE_URL = 'http://localhost:8080/api/blogPage';
-const BLOG_PAGE_API_GET_FEATURED_URL = 'http://localhost:8080/api/blogPagesFeatured';
-const BLOG_PAGE_API_GET_UN_FEATURED_URL = 'http://localhost:8080/api/blogPagesUnFeatured';
+const BLOG_PAGE_API_BASE_URL = 'blogPage';
+const BLOG_PAGE_API_GET_FEATURED_URL = 'blogPagesFeatured';
+const BLOG_PAGE_API_GET_UN_FEATURED_URL = 'blogPagesUnFeatured';
 
 // Trailing slashes here for appending
-const BLOG_PAGE_API_ADD_PAGE_URL = 'http://localhost:8080/api/addBlogPage/';
-const BLOG_PAGE_API_GET_PAGE_URL = 'http://localhost:8080/api/getBlogPage/';
-const BLOG_PAGE_API_DELETE_PAGE_URL = 'http://localhost:8080/api/deleteBlogPage/';
-const BLOG_PAGE_API_ADD_COVER_IMAGE_URL = 'http://localhost:8080/api/addCoverImage/';
-const BLOG_PAGE_API_FEATURE_URL = 'http://localhost:8080/api/markBlogPageFeatured/';
-const BLOG_PAGE_API_UN_FEATURE_URL = 'http://localhost:8080/api/markBlogPageNotFeatured/';
+const BLOG_PAGE_API_ADD_PAGE_URL = 'addBlogPage/';
+const BLOG_PAGE_API_GET_PAGE_URL = 'getBlogPage/';
+const BLOG_PAGE_API_DELETE_PAGE_URL = 'deleteBlogPage/';
+const BLOG_PAGE_API_ADD_COVER_IMAGE_URL = 'addCoverImage/';
+const BLOG_PAGE_API_FEATURE_URL = 'markBlogPageFeatured/';
+const BLOG_PAGE_API_UN_FEATURE_URL = 'markBlogPageNotFeatured/';
 
 class BlogPageService {
 	getBlogPages( getFeatured, getUnFeatured ) {
@@ -65,8 +67,5 @@ class BlogPageService {
 		axios.post( BLOG_PAGE_API_UN_FEATURE_URL + id ).then();
 	}
 }
-//
-// axios.defaults.withCredentials = true;
-// axios.defaults.withXSRFToken = true;
 
 export default new BlogPageService();
