@@ -10,9 +10,6 @@ spring:
       ddl-auto: update
 
 server:
-  tomcat:
-    accesslog:
-      enabled: true
   error:
     include-message: always
     include-binding-errors: always
@@ -25,7 +22,3 @@ logging:
           web:
             csrf:
               CsrfFilter: DEBUG
-      apache:
-        tomcat:
-          DEBUG
-        catalina: DEBUG
