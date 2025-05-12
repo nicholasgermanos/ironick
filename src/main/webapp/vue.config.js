@@ -19,7 +19,7 @@ module.exports = {
 		}
 	},
 	publicPath:
-		process.env.NODE_ENV === 'production' ? '/site/dist/' : '/',
+		process.env.NODE_ENV === 'production' ? '/dist/' : '/',
 };
 
 function addStyleResource( rule ) {
