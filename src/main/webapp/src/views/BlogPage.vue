@@ -85,12 +85,16 @@ export default {
 #cover-image-container
   height 50%
 
+  img
+    border-radius 5px 5px 0 0
+
 p
   text-align: left
 
 .blog-page
   position: relative;
   background: $theme-white
+  border-radius 10px 10px 5px 5px
 
 .article-header
   width: 90%
