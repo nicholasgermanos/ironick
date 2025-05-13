@@ -3,15 +3,6 @@
   .night
     - for (let i = 0; i < 2; i++) {
       .stars
-        - for (let j = 0; j < 1; j++) {
-          .shooting.blue
-        - }
-        - for (let j = 0; j < 1; j++) {
-          .shooting.yellow
-        - }
-        - for (let j = 0; j < 1; j++) {
-          .shooting.pink
-        - }
         - for (let j = 0; j < 2; j++) {
           .stars-fast
             - for (let k = 0; k < 125; k++) {
@@ -21,6 +12,15 @@
             - for (let k = 0; k < 125; k++) {
               .star
             - }
+        - }
+        - for (let j = 0; j < 1; j++) {
+          .shooting.blue
+        - }
+        - for (let j = 0; j < 1; j++) {
+          .shooting.yellow
+        - }
+        - for (let j = 0; j < 1; j++) {
+         .shooting.pink
         - }
     - }
 </template>
@@ -99,7 +99,7 @@ export default {
     }
   }
 
-  @for $j from 1 through 4 {
+  @for $starBoxIndex from 1 through 4 {
     .shooting {
       position: absolute;
       width: 45px;
@@ -107,8 +107,8 @@ export default {
       opacity: 0;
       animation: shooting random(3000) + 4000ms linear infinite;
 
-      @for $i from 1 through 10 {
-        &:nth-child(#{$i}) {
+      @for $shootingStarIndex from 1 through 10 {
+        &:nth-child(#{$shootingStarIndex}) {
           top: random(80) + 0%;
           left: random(100) + 0%;
           animation-delay: random(9999) * 1ms;
@@ -117,7 +117,7 @@ export default {
     }
   }
 
-  &:nth-child(2) {
+  &:nth-child(1) {
     left: 100%;
   }
 
