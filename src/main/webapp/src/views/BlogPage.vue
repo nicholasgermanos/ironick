@@ -1,6 +1,6 @@
 <template>
   <div v-if="blogPage" class="container blog-page w-100 p-0 pb-3 mt-3">
-    <div class="w-100">
+    <div id="cover-image-container">
       <img :src="getCoverImage(blogPage)" class="card-img-top" alt="Cover Image">
     </div>
     <div class="article-header">
@@ -18,7 +18,7 @@
 
       <div v-if="isAdmin()" class="text-center admin-section">
         <button class="nick-button" v-on:click="deleteBlogPage()"><i class="fa-solid fa-trash"></i> Delete</button>
-        <router-link :to="{name: 'newEntryForm', params: {blogID: blogPage.id}}">
+        <router-link :to="{name: 'entryFormEdit', params: {blogID: blogPage.id}}">
           <button class="nick-button"><i class="fa-solid fa-pencil"></i> Edit</button>
         </router-link>
         <NickCheckBox v-model="blogPage.featured" checkbox-label="Featured" :on-load-value="blogPage.featured"/>
@@ -82,6 +82,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+#cover-image-container
+  height 50%
+
 p
   text-align: left
 
