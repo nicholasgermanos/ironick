@@ -77,7 +77,7 @@ h1
 .card
   margin: 10px 10px 10px 10px;
   border: none;
-  width: 18rem;
+  width: 19rem;
   height: 22rem;
 
 .card-body
@@ -89,9 +89,10 @@ h1
   height 50%;
   min-height: 50%;
   overflow: hidden;
+  border-radius: 5px 5px 0 0;
 
 img
-  height: 100%;
+  width: 105%;
 
 .zoom
   img
