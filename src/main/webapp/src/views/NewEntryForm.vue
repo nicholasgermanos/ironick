@@ -1,20 +1,22 @@
 <template>
-  <form @submit="submit" class="container blog-form">
-    <div class="m-4">
-      <h1>New Blog Post</h1>
-      <p>Please remember to back up your posts as we are still running in beta mode</p>
-      <input required v-model="blogPost.title" placeholder="Title"/>
-      <input required v-model="blogPost.subtitle" placeholder="Subtitle"/>
-      <input required type="file" @change="uploadImage($event)"/>
-      <output>
-        <img id="image-preview" :src="previewUrl" v-if="previewUrl" alt="Cover Image Preview">
-      </output>
-      <div class="rich-text-editor">
-        <QuillEditor :toolbar="toolbarOptions" theme="snow" v-model:content="blogPost.body" content-type="html" placeholder="Body"/>
+  <div class="container form-container">
+    <form @submit="submit" class="container blog-form">
+      <div class="m-4">
+        <h1>New Blog Post</h1>
+        <p>Please remember to back up your posts as we are still running in beta mode</p>
+        <input required v-model="blogPost.title" placeholder="Title"/>
+        <input required v-model="blogPost.subtitle" placeholder="Subtitle"/>
+        <input required type="file" @change="uploadImage($event)"/>
+        <output>
+          <img id="image-preview" :src="previewUrl" v-if="previewUrl" alt="Cover Image Preview">
+        </output>
+        <div class="rich-text-editor">
+          <QuillEditor :toolbar="toolbarOptions" theme="snow" v-model:content="blogPost.body" content-type="html" placeholder="Body"/>
+        </div>
+        <button class="nick-button" type="submit" label="Publish" v-on:click="submit">Publish</button>
       </div>
-      <button class="nick-button" type="submit" label="Publish" v-on:click="submit">Publish</button>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -103,11 +105,12 @@ body, form
   .rich-text-editor
     margin-top 30px;
 
-  .ql-container
-    min-height: 200px !important;
-
   button
     margin-top: 20px;
+
+::v-global(.ql-editor)
+  resize: vertical;
+  height: 200px;
 
 #image-preview
   width: 100%;

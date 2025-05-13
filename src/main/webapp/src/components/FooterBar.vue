@@ -19,29 +19,8 @@ export default {
 
 <style lang="stylus" scoped>
 .footer-bar
-  position relative
-  bottom 0
-  background white
-  width 100%
-  height 50px;
-
-.navbar
-  .navbar-links
-    color: $theme-white
-    
-  button, span, a
-    &:hover
-      transform: scale(1.05);
-      color: $theme-white;
-    &:focus
-      color: $theme-white;
-    transition ease 0.2s
-
-  background: $theme-dark;
-
-  .hamburger
-    border-color: $theme-white;
-
-  .hamburger:focus
-    box-shadow: none;
+  background $theme-dark-ish
+  height 300px;
+  margin-top 100px;
+  z-index 1
 </style>

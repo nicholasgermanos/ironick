@@ -38,15 +38,6 @@ export default {
   height: 100%;
 }
 
-.window {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(-45deg, #0a1433 0%, #222b3f 100%);
-  border-radius: 100%;
-  overflow: hidden;
-}
-
 .star {
   position: absolute;
   width: 1px;

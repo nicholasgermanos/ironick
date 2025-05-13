@@ -1,5 +1,5 @@
 <template>
-  <div class="container p-5 flex-wrap">
+  <div class="main-content container p-5 flex-wrap">
     <div class="d-flex flex-wrap justify-content-center">
       <div v-for="blogEntry of blogEntries" v-bind:key="blogEntry.id">
         <div class="card zoom">

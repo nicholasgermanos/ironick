@@ -1,35 +1,38 @@
 <template>
+  <ShootingStars/>
   <MenuBar :key="menuBarKey"/>
   <div class="newlines">
-    <ShootingStars/>
-    <router-view @login-success="forceRerender" @logout-success="forceRerender"/>
+    <router-view class="main-content" @login-success="forceRerender" @logout-success="forceRerender"/>
+    <FooterBar/>
   </div>
 </template>
 
 <script>
-  import MenuBar from '@/components/MenuBar.vue';
-  import ShootingStars from '@/components/ShootingStars.vue';
-  import { ref } from 'vue';
+import MenuBar from '@/components/MenuBar.vue';
+import ShootingStars from '@/components/ShootingStars.vue';
+import FooterBar from '@/components/FooterBar.vue';
+import { ref } from 'vue';
 
-  export default {
-    name: 'App',
-    setup() {
+export default {
+  name: 'App',
+  setup() {
 
-      const menuBarKey = ref(0)
-      const forceRerender = () => {
-        menuBarKey.value++;
-      }
+    const menuBarKey = ref( 0 );
+    const forceRerender = () => {
+      menuBarKey.value++;
+    };
 
-      return {
-        menuBarKey,
-        forceRerender
-      }
-    },
-    components: {
-      ShootingStars,
-      MenuBar
-    }
-  };
+    return {
+      menuBarKey,
+      forceRerender
+    };
+  },
+  components: {
+    ShootingStars,
+    MenuBar,
+    FooterBar
+  }
+};
 </script>
 
 <style lang="stylus">
@@ -37,10 +40,17 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-top: 40px;
   text-align: center;
-  min-height 100rem;
 
-  // You also need to change the body style in index.html if you want to change the background
-  background: $theme-grey-ish;
+  margin-top: 56px;
+  min-height 100vh
+
+  display flex
+  flex 1 1 100%
+
+.main-content
+  display flex
+  flex-grow 1
+  width 100%
+
 </style>

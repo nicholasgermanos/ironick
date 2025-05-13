@@ -2,6 +2,7 @@
 
 // Colour scheme 2
 $theme-dark = #222831
+$theme-dark-ish = #4e535c
 $theme-grey-ish = #393E46
 $theme-brown = #948979
 $theme-white = #FAF9F6
@@ -14,19 +15,26 @@ $grid-breakpoint-xl = 1200px
 $grid-breakpoint-xxl = 1400px
 
 // Phone specific css can go under this
-@media (min-width: $grid-breakpoint-sm)
-  .newlines
-    padding-top: 20px;
-    padding-bottom: 20px;
-  
+@media (max-width: $grid-breakpoint-sm)
   button
     padding: 0.25em 0.75em;
+  
+  .main-content
+    padding: 20px 0 20px 0 !important;
+    justify-content: center;
 
 // Tablet / browser specific css can go under this
 @media (min-width: $grid-breakpoint-md)
   .newlines
     padding-top: 60px;
-    
+
+.newlines
+  display flex
+  flex-direction column;
+  height 100%
+  width 100%
+  padding-top: 60px;
+  
 .nick-button
   // Button style
   font-family: "Open Sans", sans-serif;
@@ -51,13 +59,23 @@ button:active
   left: 5px;
 
 // Forms
+.form-container
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
 .blog-form
   width: fit-content;
+  height: fit-content;
   background: $theme-white;
   position: relative;
   display: inline-flex;
   box-shadow: 2px 2px 10px 0 rgba(33, 33, 33, 0.2);
   border-radius 5px 5px 5px 5px;
+  
+  button
+    margin: 40px 0 20px 0;
+    width: 90%;
   
   input, textarea
     width: 90%;
