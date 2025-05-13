@@ -1,24 +1,24 @@
 <!--https://freefrontend.com/css-animation-examples/-->
 <template lang="pug">
   .night
-    - for (i = 0; i < 2; i++) {
+    - for (let i = 0; i < 2; i++) {
       .stars
-        - for (j = 0; j < 1; j++) {
+        - for (let j = 0; j < 1; j++) {
           .shooting.blue
         - }
-        - for (j = 0; j < 1; j++) {
+        - for (let j = 0; j < 1; j++) {
           .shooting.yellow
         - }
-        - for (j = 0; j < 1; j++) {
+        - for (let j = 0; j < 1; j++) {
           .shooting.pink
         - }
-        - for (j = 0; j < 2; j++) {
+        - for (let j = 0; j < 2; j++) {
           .stars-fast
-            - for (k = 0; k < 125; k++) {
+            - for (let k = 0; k < 125; k++) {
               .star
             - }
           .stars-slow
-            - for (k = 0; k < 125; k++) {
+            - for (let k = 0; k < 125; k++) {
               .star
             - }
         - }
