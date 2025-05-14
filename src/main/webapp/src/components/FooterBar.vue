@@ -2,19 +2,19 @@
   <div class="footer-bar">
     <div class="footer-content">
       <div class="footer-links">
-        <router-link to="/login" class="fw-bold nav-link navbar-links">About</router-link>
-        <router-link to="/login" class="fw-bold nav-link navbar-links">Contact</router-link>
         <router-link v-if="isLoggedIn()" to="/logout" class="fw-bold nav-link navbar-links">Logout</router-link>
         <router-link v-if="isLoggedOut()" to="/login" class="fw-bold nav-link navbar-links">Login</router-link>
         <router-link v-if="isLoggedOut()" to="/register" class="fw-bold nav-link navbar-links">Register</router-link>
         <router-link to="/newEntryForm" class="fw-bold nav-link navbar-links">Contribute</router-link>
+        <router-link to="/login" class="fw-bold nav-link navbar-links">About us</router-link>
+        <router-link to="/login" class="fw-bold nav-link navbar-links">Contact us</router-link>
         <a href="https://github.com/nicholasgermanos/nickblog" target="_blank" class="fw-bold nav-link navbar-links">See my code</a>
       </div>
       <div class="newsletter-signup-container">
         <h4>Get notified about new posts</h4>
         <div class="newsletter-form">
           <input placeholder="Email Address">
-          <button class="nick-button">Notify me</button>
+          <button type="submit" class="nick-button">Notify me</button>
         </div>
       </div>
     </div>
@@ -37,11 +37,9 @@ export default {
 <style lang="stylus" scoped>
 .footer-bar
   display flex
-  background $theme-dark-ish
-  margin-top 100px
-  z-index 1
-  padding 80px 10% 50px 10%
   justify-content space-evenly
+  padding 50px 10% 40px 10%
+  background $theme-dark
 
   a
     padding 3px
@@ -55,6 +53,7 @@ export default {
   display flex
   flex-wrap wrap-reverse
   justify-content space-around
+  z-index 1
 
 
 .footer-links
