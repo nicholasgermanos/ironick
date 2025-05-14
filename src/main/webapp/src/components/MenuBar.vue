@@ -15,18 +15,9 @@
             <li class="nav-item">
               <router-link to="/blogs" class="fw-bold nav-link navbar-links">Articles</router-link>
             </li>
-            <li v-if="isLoggedIn()" class="nav-item">
-              <router-link to="/newEntryForm" class="fw-bold nav-link navbar-links">New Article</router-link>
+            <li class="nav-item">
+              <router-link to="/blogs" class="fw-bold nav-link navbar-links">About</router-link>
             </li>
-            <li v-if="isLoggedOut()" class="nav-item">
-              <router-link to="/login" class="fw-bold nav-link navbar-links">Login</router-link>
-            </li>
-            <li v-if="isLoggedOut()" class="nav-item">
-              <router-link to="/register" class="fw-bold nav-link navbar-links">Register</router-link>
-            </li>
-            <li v-if="isLoggedIn()" class="nav-item">
-            <router-link to="/logout" class="fw-bold nav-link navbar-links">Logout</router-link>
-          </li>
           </ul>
         </div>
       </div>
@@ -49,9 +40,6 @@ export default {
 
 <style lang="stylus" scoped>
 .navbar
-  .navbar-links
-    color: $theme-white
-    
   button, span, a
     &:hover
       transform: scale(1.05);
