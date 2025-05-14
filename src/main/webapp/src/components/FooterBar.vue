@@ -40,8 +40,11 @@ export default {
   background $theme-dark-ish
   margin-top 100px
   z-index 1
-  padding 50px
+  padding 80px 10% 50px 10%
   justify-content space-evenly
+
+  a
+    padding 3px
 
   a:focus, a:hover
     color $theme-white
@@ -64,7 +67,7 @@ export default {
   display flex
   flex-direction column
   align-items flex-start
-  justify-content center
+  justify-content start
   width 50%
 
   h4
@@ -90,6 +93,8 @@ export default {
       color $theme-grey-ish
 
 @media (max-width: $grid-breakpoint-md)
+  .footer-bar
+    padding 10px
   .footer-links
     align-items center
     padding 0
@@ -98,6 +103,8 @@ export default {
     flex-direction column-reverse
     max-width 100%
     min-width 100%
+    margin 0
+    margin-top 50px
 
   .newsletter-signup-container
     align-items center
