@@ -84,12 +84,18 @@ export default {
       height 40px
       width 80%
       max-width 400px
-      border-radius 5px
       padding-left 10px
-      margin-right 7px
+      margin-right 15px
       margin-bottom 10px
       box-shadow: 1px 1px 0 0, 2px 2px 0 0, 3px 3px 0 0, 4px 4px 0 0, 5px 5px 0 0;
-      color $theme-grey-ish
+      border 3px $theme-dark solid
+      background-color $theme-white
+      color $theme-white
+
+    button
+      color $theme-dark
+      border-color $theme-dark
+      box-shadow: 1px 1px 0 0 $theme-white, 2px 2px 0 0 $theme-white, 3px 3px 0 0 $theme-white, 4px 4px 0 0 $theme-white, 5px 5px 0 0 $theme-white;
 
 @media (max-width: $grid-breakpoint-md)
   .footer-bar
