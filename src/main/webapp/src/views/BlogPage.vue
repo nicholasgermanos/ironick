@@ -83,6 +83,7 @@ export default {
 
 <style lang="stylus" scoped>
 #cover-image-container
+  overflow hidden
   height 50%
 
   img
@@ -92,9 +93,13 @@ p
   text-align: left
 
 .blog-page
+  display flex
+  flex-direction column
   position: relative;
   background: $theme-white
   border-radius 10px 10px 5px 5px
+  margin-top 0 !important
+  margin-bottom 100px
 
 .article-header
   width: 90%

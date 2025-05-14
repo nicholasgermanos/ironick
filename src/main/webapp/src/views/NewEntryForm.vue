@@ -108,7 +108,7 @@ body, form
   button
     margin-top: 20px;
 
-::v-global(.ql-editor)
+:deep(.ql-editor)
   resize: vertical;
   height: 200px;
 
