@@ -1,11 +1,13 @@
 //https://getcssscan.com/css-buttons-examples (button style)
 
 // Colour scheme 2
+$theme-black = #181718
 $theme-dark = #222831
 $theme-dark-ish = #4e535c
 $theme-grey-ish = #393E46
 $theme-brown = #948979
 $theme-white = #FAF9F6
+$theme-white-calm = #d5d5d5
 
 $grid-breakpoint-xs = 0
 $grid-breakpoint-sm = 576px
@@ -23,10 +25,9 @@ $grid-breakpoint-3xl = 2000px
 // Tablet / browser specific css can go under this
 @media (max-width: $grid-breakpoint-md)
   .newlines
-    padding-top 60px
+    padding-top 30px
   
   .main-content
-    padding 20px 0 20px 0 !important
     justify-content center
 
 .newlines
@@ -34,7 +35,7 @@ $grid-breakpoint-3xl = 2000px
   flex-direction column
   height 100%
   width 100%
-  padding-top 60px
+  padding-top 30px
   
 .nick-button
   // Button style

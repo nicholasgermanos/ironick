@@ -1,43 +1,60 @@
 <template>
-  <div class="footer-bar">
-    <div class="footer-content">
-      <div class="footer-links">
-        <router-link v-if="isLoggedIn()" to="/logout" class="fw-bold nav-link navbar-links">Logout</router-link>
-        <router-link v-if="isLoggedOut()" to="/login" class="fw-bold nav-link navbar-links">Login</router-link>
-        <router-link v-if="isLoggedOut()" to="/register" class="fw-bold nav-link navbar-links">Register</router-link>
-        <router-link to="/newEntryForm" class="fw-bold nav-link navbar-links">Contribute</router-link>
-        <router-link to="/login" class="fw-bold nav-link navbar-links">About us</router-link>
-        <router-link to="/login" class="fw-bold nav-link navbar-links">Contact us</router-link>
-        <a href="https://github.com/nicholasgermanos/nickblog" target="_blank" class="fw-bold nav-link navbar-links">See my code</a>
-      </div>
-      <div class="newsletter-signup-container">
-        <h4>Get notified about new posts</h4>
-        <div class="newsletter-form">
-          <input placeholder="Email Address">
-          <button type="submit" class="nick-button">Notify me</button>
+    <div class="footer-bar">
+        <div class="footer-content">
+            <div class="footer-links">
+                <router-link v-if="isLoggedIn()" to="/logout" class="fw-bold nav-link navbar-links">Logout</router-link>
+                <router-link v-if="isLoggedOut()" to="/login" class="fw-bold nav-link navbar-links">Login</router-link>
+                <router-link v-if="isLoggedOut()" to="/register"
+                    class="fw-bold nav-link navbar-links">Register</router-link>
+                <router-link v-if="isLoggedIn()" to="/newEntryForm"
+                    class="fw-bold nav-link navbar-links">Contribute</router-link>
+                <router-link to="/contact" class="fw-bold nav-link navbar-links">About</router-link>
+                <router-link to="/contact" class="fw-bold nav-link navbar-links">Contact</router-link>
+                <a href="https://github.com/nicholasgermanos/nickblog" target="_blank"
+                    class="fw-bold nav-link navbar-links">See
+                    my code</a>
+            </div>
+            <div class="newsletter-signup-container">
+                <h4>Get notified about new posts</h4>
+                <form class="newsletter-form">
+                    <input v-model="email" placeholder="Email Address">
+                    <button v-on:click="registerMailingList" type="submit" class="nick-button">Notify me</button>
+                </form>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
 
 import { isLoggedIn, isLoggedOut } from '@/utils/localStorageUtils';
-
+import MailingListService from '@/services/mailingListService';
 export default {
-  name: 'MenuBar',
-  methods: {
-    isLoggedIn,
-    isLoggedOut
-  }
+    name: 'MenuBar',
+    methods: {
+        isLoggedIn,
+        isLoggedOut,
+        registerMailingList() {
+            MailingListService.registerEmail(this.email);
+        }
+    },
+    data() {
+        return {
+            email: null
+        };
+    }
+
 };
 </script>
 
 <style lang="stylus" scoped>
+a:hover
+    mouse pointer
+
 .footer-bar
   display flex
   justify-content space-evenly
+  position relative
   padding 50px 10% 40px 10%
   background $theme-dark
 
@@ -54,7 +71,6 @@ export default {
   flex-wrap wrap-reverse
   justify-content space-around
   z-index 1
-
 
 .footer-links
   display flex
@@ -87,19 +103,21 @@ export default {
       padding-left 10px
       margin-right 15px
       margin-bottom 10px
-      box-shadow: 1px 1px 0 0, 2px 2px 0 0, 3px 3px 0 0, 4px 4px 0 0, 5px 5px 0 0;
+      box-shadow: 1px 1px 0 0 $theme-white, 2px 2px 0 0 $theme-white, 3px 3px 0 0 $theme-white, 4px 4px 0 0 $theme-white, 5px 5px 0 0 $theme-white;
       border 3px $theme-dark solid
       background-color $theme-white
-      color $theme-white
+      color $theme-dark
 
     button
       color $theme-dark
       border-color $theme-dark
       box-shadow: 1px 1px 0 0 $theme-white, 2px 2px 0 0 $theme-white, 3px 3px 0 0 $theme-white, 4px 4px 0 0 $theme-white, 5px 5px 0 0 $theme-white;
 
+
 @media (max-width: $grid-breakpoint-md)
   .footer-bar
     padding 10px
+
   .footer-links
     align-items center
     padding 0

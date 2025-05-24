@@ -3,7 +3,8 @@
     <nav class="navbar navbar-expand-sm fixed-top">
       <div class="container">
         <router-link to="/" role="button" class="fw-bold navbar-brand navbar-links">Ironick</router-link>
-        <button class="hamburger navbar-links navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle"
+        <button class="hamburger navbar-links navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggle"
                 aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="fa-solid fa-bars"></span>
         </button>
@@ -18,6 +19,11 @@
             <li class="nav-item">
               <router-link to="/blogs" class="fw-bold nav-link navbar-links">About</router-link>
             </li>
+            <li id="fullscreen-button" class="nav-item fullscreen-icon">
+              <router-link to="/blogs" class="fw-bold nav-link navbar-links"><img v-on:click="fullscreen" src="../assets/fullscreen.png"
+                                                                                  alt="Fullscreen"></router-link>
+            </li>
+            /li>
           </ul>
         </div>
       </div>
@@ -33,7 +39,10 @@ export default {
   name: 'MenuBar',
   methods: {
     isLoggedIn,
-    isLoggedOut
+    isLoggedOut,
+    fullscreen: function() {
+      this.$emit('fullscreen')
+    },
   }
 };
 </script>
@@ -44,6 +53,7 @@ export default {
     &:hover
       transform: scale(1.05);
       color: $theme-white;
+
     &:focus
       color: $theme-white;
     transition ease 0.2s
@@ -55,4 +65,12 @@ export default {
 
   .hamburger:focus
     box-shadow: none;
+
+.fullscreen-icon
+  img
+    height 25px
+
+    &:hover
+      transform: scale(1.2)
+
 </style>

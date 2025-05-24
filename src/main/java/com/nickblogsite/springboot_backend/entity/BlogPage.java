@@ -21,6 +21,7 @@ public class BlogPage {
 	private String title;
 	private String subtitle;
 	private boolean featured;
+	private boolean published;
 
 	@Column(length = 100000)
 	private String body;

@@ -1,7 +1,7 @@
 <template>
-  <ShootingStars/>
-  <MenuBar :key="menuBarKey"/>
-  <div class="newlines">
+  <ShootingStars id="stars"/>
+  <MenuBar v-if="!isFullScreen" @fullscreen="openFullscreen" :key="menuBarKey"/>
+  <div v-if="!isFullScreen" class="newlines">
     <router-view class="main-content" @login-success="forceRerender" @logout-success="forceRerender"/>
     <FooterBar/>
   </div>
@@ -16,7 +16,6 @@ import { ref } from 'vue';
 export default {
   name: 'App',
   setup() {
-
     const menuBarKey = ref( 0 );
     const forceRerender = () => {
       menuBarKey.value++;
@@ -24,8 +23,31 @@ export default {
 
     return {
       menuBarKey,
-      forceRerender
+      forceRerender,
     };
+  },
+  data() {
+    return {
+      isFullScreen: false
+    }
+  },
+  mounted() {
+    document.addEventListener('fullscreenchange', this.handleFullScreen)
+  },
+  methods: {
+    handleFullScreen() {
+      this.isFullScreen = !!document.fullscreenElement
+    },
+    openFullscreen() {
+      var fullscreenButton = document.getElementById( 'stars' );
+      if ( fullscreenButton.requestFullscreen ) {
+        fullscreenButton.requestFullscreen();
+      } else if ( fullscreenButton.webkitRequestFullscreen ) { /* Safari */
+        fullscreenButton.webkitRequestFullscreen();
+      } else if ( fullscreenButton.msRequestFullscreen ) { /* IE11 */
+        fullscreenButton.msRequestFullscreen();
+      }
+    }
   },
   components: {
     ShootingStars,

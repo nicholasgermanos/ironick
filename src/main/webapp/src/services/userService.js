@@ -24,9 +24,11 @@ class UserService {
 		})
 	}
 	register(user) {
-		axios.post(USER_API_REGISTER_URL, user).then(response => {
+		return axios.post(USER_API_REGISTER_URL, user).then(response => {
 			if (isEmpty(response.data) === false ) {
 				router.push( "/" ).then()
+			} else {
+				return "Bad combo. Please make sure your email is valid and your password is complex"
 			}
 		})
 	}

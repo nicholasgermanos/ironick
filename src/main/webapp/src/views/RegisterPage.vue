@@ -3,6 +3,7 @@
     <form @submit.prevent="submit" class="container blog-form">
       <div class="m-4">
         <h1>Hi, nice to meet you</h1>
+        <div class="error" v-if="errorMessage">{{ errorMessage }}</div>
         <input v-model="user.firstName" placeholder="First Name"/>
         <input v-model="user.lastName" placeholder="Surname"/>
         <input v-model="user.email" placeholder="Email"/>
@@ -16,11 +17,13 @@
 <script>
 
 import UserService from '@/services/userService';
+import { isEmpty } from '@/utils/utils';
 
 export default {
   name: "RegisterPage",
   data() {
     return {
+      errorMessage: undefined,
       user: {
         firstName: null,
         lastName: null,
@@ -31,7 +34,11 @@ export default {
   },
   methods: {
     submit() {
-      UserService.register(this.user)
+      UserService.register(this.user).then(response => {
+        if (!isEmpty(response)) {
+          this.errorMessage = response;
+        }
+      })
     }
   }
 };
