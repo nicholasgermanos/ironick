@@ -14,7 +14,7 @@
               My Drafts
             </div>
           </router-link>
-          <router-link to="/newEntryForm"
+          <router-link to="/published"
                        class="fw-bold nav-link">
             <div class="contribute-option">
               Published
