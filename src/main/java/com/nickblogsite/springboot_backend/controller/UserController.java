@@ -66,9 +66,9 @@ public class UserController {
 			return false;
 		}
 
-		return password.length() < 8
-			   && password.contains( "[a-z]" )
-			   && password.contains( "[A-Z]" )
-			   && password.contains( "[0-9]" );
+		return password.length() >= 8
+			   && password.matches( ".*[a-z].*" )
+			   && password.matches( ".*[A-Z].*" )
+			   && password.matches( ".*[0-9].*" );
 	}
 }

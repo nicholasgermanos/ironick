@@ -20,8 +20,7 @@
               <router-link to="/blogs" class="fw-bold nav-link navbar-links">About</router-link>
             </li>
             <li id="fullscreen-button" class="nav-item fullscreen-icon">
-              <router-link to="/blogs" class="fw-bold nav-link navbar-links"><img v-on:click="fullscreen" src="../assets/fullscreen.png"
-                                                                                  alt="Fullscreen"></router-link>
+              <img v-on:click="fullscreen" src="../assets/fullscreen.png" alt="Fullscreen">
             </li>
             /li>
           </ul>
@@ -67,10 +66,16 @@ export default {
     box-shadow: none;
 
 .fullscreen-icon
+  margin-top 6px
+  margin-left 6px
+  a:hover
+    transform none
+    transition none
   img
-    height 25px
+    height 23px
 
     &:hover
       transform: scale(1.2)
+    transition ease 0.2s
 
 </style>
