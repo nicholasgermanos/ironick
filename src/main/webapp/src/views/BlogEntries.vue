@@ -28,6 +28,7 @@
 import { getCoverImage } from '@/utils/blogPageUtils';
 import BlogPageService from '@/services/blogPageService';
 import { isEmpty } from '@/utils/utils';
+import { getLoggedInID } from '@/utils/localStorageUtils';
 
 export default {
   name: 'BlogEntries',
@@ -44,20 +45,30 @@ export default {
       default: 'Articles'
     },
     featured: Boolean,
-    unFeatured: Boolean
+    unFeatured: Boolean,
+    drafts: Boolean
   },
   methods: {
     getCoverImage,
     getBlogPages() {
-      BlogPageService.getBlogPages( this.featured, this.unFeatured ).then( ( response ) => {
-        if ( isEmpty( response.data ) !== true ) {
-          this.blogEntries = response.data;
-          this.firstBlogEntry = this.blogEntries[ 0 ].id;
-        }
-      } );
+      if ( this.drafts === true) {
+        BlogPageService.getDrafts( getLoggedInID() ).then( (response) => {
+          this.setBlogEntries(response)
+       })
+      } else {
+        BlogPageService.getBlogPages( this.featured, this.unFeatured ).then( ( response ) => {
+          this.setBlogEntries(response)
+        } );
+      }
     },
     isFirstCard( id ) {
       return id === this.firstBlogEntry;
+    },
+    setBlogEntries(response) {
+      if (isEmpty(response.data) !== true) {
+        this.blogEntries = response.data;
+        this.firstBlogEntry = this.blogEntries[0].id;
+      }
     }
   },
   mounted() {

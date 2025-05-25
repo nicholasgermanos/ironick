@@ -75,6 +75,7 @@ export default {
     height 23px
 
     &:hover
+      cursor pointer
       transform: scale(1.2)
     transition ease 0.2s
 

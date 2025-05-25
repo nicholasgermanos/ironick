@@ -1,6 +1,6 @@
 <template>
   <div class="container form-container">
-    <form @submit="submit" class="container blog-form">
+    <div class="container blog-form">
       <div class="m-4">
         <h1>New Blog Post</h1>
         <p>Please remember to back up your posts as we are still running in beta mode</p>
@@ -11,11 +11,18 @@
           <img id="image-preview" :src="previewUrl" v-if="previewUrl" alt="Cover Image Preview">
         </output>
         <div class="rich-text-editor">
-          <QuillEditor :toolbar="toolbarOptions" theme="snow" v-model:content="blogPost.body" content-type="html" placeholder="Body"/>
+          <QuillEditor :toolbar="toolbarOptions" theme="snow" v-model:content="blogPost.body" content-type="html"
+                       placeholder="Body"/>
         </div>
-        <button class="nick-button" type="submit" label="Publish" v-on:click="submit">Publish</button>
+        <div class="buttons">
+          <button class="nick-button" type="submit" label="Save Draft" v-on:click="submit(false)">Save Draft</button>
+          <button class="nick-button" type="submit" label="Publish" v-on:click="submit(true)">Publish</button>
+        </div>
+        <div id="last-saved" v-if="blogPost.lastSaved">
+          <p>Last saved {{ getFormattedDate(blogPost.lastSaved) }}</p>
+        </div>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -24,6 +31,7 @@ import BlogPageService from '@/services/blogPageService';
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { getLoggedInID } from '@/utils/localStorageUtils';
+import { getFormattedDate } from '@/utils/utils';
 
 export default {
   name: 'NewEntryForm',
@@ -31,24 +39,24 @@ export default {
     QuillEditor
   },
   data() {
-   const toolbarOptions = [
-      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-      ['blockquote', 'code-block'],
-      ['link', 'image', 'video', 'formula'],
+    const toolbarOptions = [
+      [ 'bold', 'italic', 'underline', 'strike' ],        // toggled buttons
+      [ 'blockquote', 'code-block' ],
+      [ 'link', 'image', 'video', 'formula' ],
 
-      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'list': 'check' }],
-      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+      [ { 'header': 1 }, { 'header': 2 } ],               // custom button values
+      [ { 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' } ],
+      [ { 'script': 'sub' }, { 'script': 'super' } ],      // superscript/subscript
+      [ { 'indent': '-1' }, { 'indent': '+1' } ],          // outdent/indent
 
-      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+      [ { 'size': [ 'small', false, 'large', 'huge' ] } ],  // custom dropdown
+      [ { 'header': [ 1, 2, 3, 4, 5, 6, false ] } ],
 
-      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-      [{ 'font': [] }],
-      [{ 'align': [] }],
+      [ { 'color': [] }, { 'background': [] } ],          // dropdown with defaults from theme
+      [ { 'font': [] } ],
+      [ { 'align': [] } ],
 
-      ['clean']                                         // remove formatting button
+      [ 'clean' ]                                         // remove formatting button
     ];
 
     return {
@@ -58,7 +66,9 @@ export default {
         subtitle: '',
         body: '',
         timestamp: null,
-        featured: false
+        featured: false,
+        published: false,
+        lastSaved: null
       },
       userID: getLoggedInID(),
       coverImage: null,
@@ -76,10 +86,22 @@ export default {
     );
   },
   methods: {
-    submit: function(/*event*/) {
-      this.$data.blogPost.timestamp = Date.now()
-      BlogPageService.addBlogPage( this.blogPost, this.userID, this.coverImage );
-      this.$router.push('/')
+    getFormattedDate,
+    submit: function( publish ) {
+      if (publish === true) {
+        confirm( "Are you ready to publish?")
+      }
+      this.blogPost.published = publish;
+      this.blogPost.timestamp = Date.now();
+      this.blogPost.lastSaved = Date.now();
+      BlogPageService.addBlogPage( this.blogPost, this.userID, this.coverImage ).then( ( response ) => {
+        this.blogPost = response.data
+      })
+      if ( publish === true ) {
+        this.$router.push( '/' );
+      } else {
+        this.$router.push('/newEntryForm/' + this.blogPost.id )
+      }
     },
     uploadImage( event ) {
       this.coverImage = event.target.files[ 0 ];
@@ -96,13 +118,21 @@ export default {
       };
       reader.readAsDataURL( this.coverImage );
     }
-  },
+  }
 };
 </script>
 
 <style lang="stylus" scoped>
-body, form
-  .rich-text-editor
+.blog-form
+  padding-top 10px
+
+  button
+    width 45%
+
+.buttons
+  display flex
+  justify-content space-around
+.rich-text-editor
     margin-top 30px;
 
   button
@@ -114,4 +144,7 @@ body, form
 
 #image-preview
   width: 100%;
+
+#last-saved
+  font-size 14px
 </style>

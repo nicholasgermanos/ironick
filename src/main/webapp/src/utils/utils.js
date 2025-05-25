@@ -17,3 +17,10 @@ export function isEmptyCascade(object, list) {
 		return isEmptyCascade(object[list.shift()], list)
 	}
 }
+
+export function getFormattedDate( timestamp ) {
+	const date = new Date( timestamp );
+
+	const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+	return date.toLocaleTimeString( 'en-AU', options );
+}

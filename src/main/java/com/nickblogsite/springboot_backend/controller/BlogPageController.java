@@ -15,11 +15,11 @@ import lombok.*;
 public class BlogPageController {
 
 	private final BlogPageRepository blogPageRepository;
-	private final UserRepository userRepository;
+	private final UserRepository     userRepository;
 
 	@GetMapping( "/blogPage" )
 	public List<BlogPage> fetchBlogs() {
-		final List<BlogPage> blogPages = blogPageRepository.findAll();
+		final List<BlogPage> blogPages = blogPageRepository.getPublishedBlogPages();
 		blogPages.sort( Comparator.comparingLong( BlogPage::getId ).reversed() );
 		return blogPages;
 	}
@@ -34,6 +34,14 @@ public class BlogPageController {
 	@GetMapping( "/blogPagesUnFeatured" )
 	public List<BlogPage> fetchBlogsUnFeatured() {
 		final List<BlogPage> blogPages = blogPageRepository.getUnFeaturedBlogPages();
+		blogPages.sort( Comparator.comparingLong( BlogPage::getId ).reversed() );
+		return blogPages;
+	}
+
+	@GetMapping( "/drafts/{userID}" )
+	public List<BlogPage> fetchDrafts( @PathVariable final String userID ) {
+		final Optional<User> user = userRepository.findById( Long.parseLong( userID ) );
+		final List<BlogPage> blogPages = blogPageRepository.getUnPublishedByUser( user.orElse( null ) );
 		blogPages.sort( Comparator.comparingLong( BlogPage::getId ).reversed() );
 		return blogPages;
 	}
@@ -70,6 +78,19 @@ public class BlogPageController {
 	public void markBlogPageNotFeatured( @PathVariable( "id" ) final String id ) {
 		final BlogPage blogPage = blogPageRepository.getReferenceById( Long.parseLong( id ) );
 		blogPage.setFeatured( false );
+		blogPageRepository.save( blogPage );
+	}
+	@PostMapping( "/publish/{id}" )
+	public void publishBlogPage( @PathVariable( "id" ) final String id ) {
+		final BlogPage blogPage = blogPageRepository.getReferenceById( Long.parseLong( id ) );
+		blogPage.setPublished( true );
+		blogPageRepository.save( blogPage );
+	}
+
+	@PostMapping( "/unpublish/{id}" )
+	public void unPublishBlogPage( @PathVariable( "id" ) final String id ) {
+		final BlogPage blogPage = blogPageRepository.getReferenceById( Long.parseLong( id ) );
+		blogPage.setPublished( false );
 		blogPageRepository.save( blogPage );
 	}
 }

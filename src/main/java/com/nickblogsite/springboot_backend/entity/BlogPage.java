@@ -18,6 +18,7 @@ public class BlogPage {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private long timestamp;
+	private long lastSaved;
 	private String title;
 	private String subtitle;
 	private boolean featured;

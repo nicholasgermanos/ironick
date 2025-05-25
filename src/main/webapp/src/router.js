@@ -8,6 +8,8 @@ import LoginPage from '@/views/LoginPage.vue';
 import RegisterPage from '@/views/RegisterPage.vue';
 import LogoutPage from '@/views/LogoutPage.vue';
 import ContactCard from '@/views/ContactCard.vue'
+import ContributeMenu from '@/views/ContributeMenu.vue';
+import DraftsPage from '@/views/DraftsPage.vue';
 
 const routes = [
 	{ name: 'root', path: '/', component: HomePage },
@@ -19,6 +21,9 @@ const routes = [
 	{ name: 'blogs', path: '/blogs', component: BlogEntries },
 	{ name: 'blog', path: '/blog/:blogID', component: BlogPage, props: true },
 	{ name: 'contact', path: '/contact', component: ContactCard },
+	{ name: 'contribute', path: '/contribute', component: ContributeMenu},
+	{ name: 'drafts', path: '/drafts', component: DraftsPage},
+
 ];
 
 const router = createRouter( {

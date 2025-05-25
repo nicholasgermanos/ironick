@@ -15,7 +15,7 @@ export function getLoggedInID() {
 }
 
 export function isAdmin() {
-	return localStorage.getItem('role') === 'ADMINISTRATOR'
+	return isLoggedIn() === true && localStorage.getItem('role') === 'ADMINISTRATOR'
 }
 
 export function isLoggedIn() {
