@@ -4,11 +4,11 @@ import { isEmpty } from '@/utils/utils';
 axios.defaults.baseURL = '/api/';
 
 // No trailing slashes here
-const BLOG_PAGE_API_BASE_URL = 'blogPage';
 const BLOG_PAGE_API_GET_FEATURED_URL = 'blogPagesFeatured';
 const BLOG_PAGE_API_GET_UN_FEATURED_URL = 'blogPagesUnFeatured';
 
 // Trailing slashes here for appending
+const BLOG_PAGE_API_BASE_URL = 'blogPage/';
 const BLOG_PAGE_API_ADD_PAGE_URL = 'addBlogPage/';
 const BLOG_PAGE_API_GET_PAGE_URL = 'getBlogPage/';
 const BLOG_PAGE_API_DELETE_PAGE_URL = 'deleteBlogPage/';
@@ -30,6 +30,10 @@ class BlogPageService {
 		}
 
 		return axios.get( BLOG_PAGE_API_BASE_URL )
+	}
+
+	getBlogPagesByUser(userID) {
+		return axios.get(BLOG_PAGE_API_BASE_URL + userID)
 	}
 
 	getDrafts(userId) {

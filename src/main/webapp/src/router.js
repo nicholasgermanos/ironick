@@ -10,6 +10,7 @@ import LogoutPage from '@/views/LogoutPage.vue';
 import ContactCard from '@/views/ContactCard.vue'
 import ContributeMenu from '@/views/ContributeMenu.vue';
 import DraftsPage from '@/views/DraftsPage.vue';
+import PublishedPage from '@/views/PublishedPage.vue';
 
 const routes = [
 	{ name: 'root', path: '/', component: HomePage },
@@ -23,6 +24,7 @@ const routes = [
 	{ name: 'contact', path: '/contact', component: ContactCard },
 	{ name: 'contribute', path: '/contribute', component: ContributeMenu},
 	{ name: 'drafts', path: '/drafts', component: DraftsPage},
+	{ name: 'published', path: '/published', component: PublishedPage},
 
 ];
 

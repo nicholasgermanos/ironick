@@ -46,28 +46,27 @@ export default {
     },
     featured: Boolean,
     unFeatured: Boolean,
-    drafts: Boolean
+    drafts: Boolean,
+    fetchUserBlogs: Boolean
   },
   methods: {
     getCoverImage,
     getBlogPages() {
-      if ( this.drafts === true) {
-        BlogPageService.getDrafts( getLoggedInID() ).then( (response) => {
-          this.setBlogEntries(response)
-       })
+      if ( this.fetchUserBlogs === true ) {
+        BlogPageService.getBlogPagesByUser( getLoggedInID() ).then( ( response ) => this.setBlogEntries( response ) );
+      } else if ( this.drafts === true ) {
+        BlogPageService.getDrafts( getLoggedInID() ).then( ( response ) => this.setBlogEntries( response ) );
       } else {
-        BlogPageService.getBlogPages( this.featured, this.unFeatured ).then( ( response ) => {
-          this.setBlogEntries(response)
-        } );
+        BlogPageService.getBlogPages( this.featured, this.unFeatured ).then( ( response ) => this.setBlogEntries( response ) )
       }
     },
     isFirstCard( id ) {
       return id === this.firstBlogEntry;
     },
-    setBlogEntries(response) {
-      if (isEmpty(response.data) !== true) {
+    setBlogEntries( response ) {
+      if ( isEmpty( response.data ) !== true ) {
         this.blogEntries = response.data;
-        this.firstBlogEntry = this.blogEntries[0].id;
+        this.firstBlogEntry = this.blogEntries[ 0 ].id;
       }
     }
   },

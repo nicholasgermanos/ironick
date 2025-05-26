@@ -17,9 +17,14 @@ public class BlogPageController {
 	private final BlogPageRepository blogPageRepository;
 	private final UserRepository     userRepository;
 
-	@GetMapping( "/blogPage" )
-	public List<BlogPage> fetchBlogs() {
-		final List<BlogPage> blogPages = blogPageRepository.getPublishedBlogPages();
+	@GetMapping( "/blogPage/{userID}" )
+	public List<BlogPage> fetchBlogs(@PathVariable final String userID) {
+		final List<BlogPage> blogPages;
+		if (userID == null) {
+			blogPages = blogPageRepository.getPublishedBlogPages();
+		} else {
+			blogPages = blogPageRepository.getPublishedByUser( userRepository.findById(Long.parseLong(userID)).orElse( null ) );
+		}
 		blogPages.sort( Comparator.comparingLong( BlogPage::getId ).reversed() );
 		return blogPages;
 	}

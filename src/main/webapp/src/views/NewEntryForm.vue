@@ -12,14 +12,15 @@
         </output>
         <div class="rich-text-editor">
           <QuillEditor :toolbar="toolbarOptions" theme="snow" v-model:content="blogPost.body" content-type="html"
+                       @textChange="setupAutoSave"
                        placeholder="Body"/>
         </div>
         <div class="buttons">
-          <button class="nick-button" type="submit" label="Save Draft" v-on:click="submit(false)">Save Draft</button>
-          <button class="nick-button" type="submit" label="Publish" v-on:click="submit(true)">Publish</button>
+          <button class="nick-button" type="submit" label="Save Draft" v-on:click="submit(false, true)">Save Draft</button>
+          <button class="nick-button" type="submit" label="Publish" v-on:click="submit(true, true)">Publish</button>
         </div>
         <div id="last-saved" v-if="blogPost.lastSaved">
-          <p>Last saved {{ getFormattedDate(blogPost.lastSaved) }}</p>
+          <p>Last saved {{ getFormattedDate( blogPost.lastSaved ) }}</p>
         </div>
       </div>
     </div>
@@ -80,27 +81,31 @@ export default {
     blogID: String
   },
   beforeMount() {
-    BlogPageService.getBlogPage( this.$props.blogID ).then( response => {
-                                                              this.blogPost = response.data;
-                                                            }
-    );
+    BlogPageService.getBlogPage( this.$props.blogID ).then( response => this.blogPost = response.data );
   },
   methods: {
     getFormattedDate,
-    submit: function( publish ) {
-      if (publish === true) {
-        confirm( "Are you ready to publish?")
+    submit: function( publish, redirect ) {
+      if ( publish === true ) {
+        confirm( 'Are you ready to publish?' );
       }
+
+      window.onbeforeunload = undefined;
+
       this.blogPost.published = publish;
-      this.blogPost.timestamp = Date.now();
+      if ( this.blogPost.timestamp === undefined ) {
+        this.blogPost.timestamp = Date.now();
+      }
+
       this.blogPost.lastSaved = Date.now();
       BlogPageService.addBlogPage( this.blogPost, this.userID, this.coverImage ).then( ( response ) => {
-        this.blogPost = response.data
-      })
-      if ( publish === true ) {
+        this.blogPost = response.data;
+      } );
+
+      if ( redirect === true && publish === true ) {
         this.$router.push( '/' );
-      } else {
-        this.$router.push('/newEntryForm/' + this.blogPost.id )
+      } else if( redirect === true) {
+        this.$router.push( '/newEntryForm/' + this.blogPost.id );
       }
     },
     uploadImage( event ) {
@@ -117,7 +122,16 @@ export default {
         that.previewUrl = e.target.result;
       };
       reader.readAsDataURL( this.coverImage );
+    },
+    setupAutoSave() {
+      window.onbeforeunload = function() {
+        return 'Unsaved changes detected, are you sure you want to leave?';
+      };
     }
+  },
+  unmounted() {
+    window.onbeforeunload = undefined;
+    this.submit( false, false );
   }
 };
 </script>
@@ -132,11 +146,12 @@ export default {
 .buttons
   display flex
   justify-content space-around
-.rich-text-editor
-    margin-top 30px;
 
-  button
-    margin-top: 20px;
+.rich-text-editor
+  margin-top 30px;
+
+button
+  margin-top: 20px;
 
 :deep(.ql-editor)
   resize: vertical;
