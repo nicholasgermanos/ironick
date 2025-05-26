@@ -2,7 +2,8 @@
   <div class="container form-container">
     <div class="container blog-form">
       <div class="m-4">
-        <h1>New Blog Post</h1>
+        <h1 v-if="this.blogID">Edit Post</h1>
+        <h1 v-if="!this.blogID">New Post</h1>
         <p>Please remember to back up your posts as we are still running in beta mode</p>
         <input required v-model="blogPost.title" placeholder="Title"/>
         <input required v-model="blogPost.subtitle" placeholder="Subtitle"/>
