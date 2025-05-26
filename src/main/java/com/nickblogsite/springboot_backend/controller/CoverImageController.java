@@ -1,6 +1,7 @@
 package com.nickblogsite.springboot_backend.controller;
 
 import java.io.*;
+import java.util.*;
 import java.util.logging.*;
 
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +25,11 @@ public class CoverImageController {
 	@PostMapping("/addCoverImage/{id}")
 	public void addCoverImage( @PathVariable("id") final String id, @RequestParam("image") final MultipartFile file ) {
 
+		final CoverImage coverImage = coverImageRepository.findById( Long.parseLong( id ) ).orElse( new CoverImage() );
+
 		try {
-			final CoverImage coverImage = CoverImage.builder()
-				.blogPage( blogPageRepository.findById( Long.parseLong( id ) ).orElse( null ) )
-				.data( file.getBytes() )
-				.build();
+			coverImage.setBlogPage( blogPageRepository.findById( Long.parseLong( id ) ).orElse( null ) );
+			coverImage.setData( file.getBytes() );
 
 			coverImageRepository.save( coverImage );
 		} catch ( final IOException ioException ) {
