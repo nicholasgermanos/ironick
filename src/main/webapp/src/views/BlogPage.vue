@@ -3,15 +3,15 @@
     <div id="cover-image-container">
       <img :src="getCoverImage(blogPage)" class="card-img-top" alt="Cover Image">
     </div>
-    <div class="article-header">
+    <div v-if="blogPage.aboutPage !== true" class="article-header">
       <hr/>
       <div class="article-metadata">
         <p class="left">{{ getDate() }}</p>
-        <p class="right">by {{ blogPage.user.firstName }} {{ blogPage.user.lastName }}</p>
+        <p class="right">by {{ blogPage.author }}</p>
       </div>
       <hr/>
     </div>
-    <div class="container p-5" v-if="blogPage !== null">
+    <div class="container p-5">
       <h1 class="text-uppercase">{{ blogPage.title }}</h1>
       <h4 class="fst-italic fw-light">{{ blogPage.subtitle }}</h4>
       <div class="ql-editor" v-html="blogPage.body"/>

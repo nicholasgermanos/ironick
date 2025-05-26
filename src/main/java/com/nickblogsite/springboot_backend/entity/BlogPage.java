@@ -21,6 +21,7 @@ public class BlogPage {
 	private long lastSaved;
 	private String title;
 	private String subtitle;
+	private String author;
 	private boolean featured;
 	private boolean published;
 	private boolean isAboutPage;
@@ -36,5 +37,6 @@ public class BlogPage {
 	@ManyToOne
 	@JsonIgnoreProperties("blogPages")
 	@JoinColumn(name="user_id", nullable = false)
+	@JsonBackReference
 	private User user;
 }

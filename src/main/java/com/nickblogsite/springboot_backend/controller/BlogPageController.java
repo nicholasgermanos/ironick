@@ -71,7 +71,14 @@ public class BlogPageController {
 	@PostMapping( "/addBlogPage/{userID}" )
 	@ResponseBody
 	public BlogPage addBlogPage( @PathVariable( "userID" ) final String userID, @RequestBody final BlogPage newBlogPage ) {
-		newBlogPage.setUser( userRepository.findById( Long.parseLong( userID ) ).orElse( null ) );
+		final User user = userRepository.findById( Long.parseLong( userID ) ).orElse( null );
+		if (user != null) {
+			newBlogPage.setUser(user);
+			newBlogPage.setAuthor( user.getFirstName() + " " + user.getLastName() );
+		} else {
+			throw new IllegalArgumentException( "User not found" );
+		}
+
 		return blogPageRepository.save( newBlogPage );
 	}
 

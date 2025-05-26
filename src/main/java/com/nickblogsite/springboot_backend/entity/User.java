@@ -2,6 +2,8 @@ package com.nickblogsite.springboot_backend.entity;
 
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.*;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,5 +30,6 @@ public class User {
 	private String role;
 
 	@OneToMany(mappedBy = "user")
+	@JsonBackReference
 	private Set<BlogPage> blogPages;
 }
