@@ -17,7 +17,7 @@
               <router-link to="/blogs" class="fw-bold nav-link navbar-links">Articles</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/blogs" class="fw-bold nav-link navbar-links">About</router-link>
+              <router-link to="/about" class="fw-bold nav-link navbar-links">About</router-link>
             </li>
             <li v-if="!isMobile()" id="fullscreen-button" class="nav-item fullscreen-icon">
               <img v-on:click="fullscreen" src="../assets/fullscreen.png" alt="Fullscreen">

@@ -69,7 +69,8 @@ export default {
         timestamp: null,
         featured: false,
         published: false,
-        lastSaved: null
+        lastSaved: null,
+        aboutPage: false
       },
       userID: getLoggedInID(),
       coverImage: null,

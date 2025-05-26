@@ -17,21 +17,21 @@
       <div class="ql-editor" v-html="blogPage.body"/>
 
       <div v-if="isAdmin()" class="text-center admin-section">
-        <button class="nick-button" v-on:click="deleteBlogPage()"><i class="fa-solid fa-trash"></i>
+        <button v-if="blogPage.aboutPage!== true" class="nick-button" v-on:click="deleteBlogPage()"><i class="fa-solid fa-trash"></i>
           Delete
         </button>
         <router-link :to="{ name: 'entryFormEdit', params: { blogID: blogPage.id } }">
           <button class="nick-button"><i class="fa-solid fa-pencil"></i> Edit</button>
         </router-link>
-        <button v-if="blogPage.published !== true" class="nick-button" v-on:click="publish()"><i
+        <button v-if="blogPage.published !== true && blogPage.aboutPage !== true" class="nick-button" v-on:click="publish()"><i
             class="fa-solid fa-trash"></i>
           Publish
         </button>
-        <button v-if="blogPage.published === true" class="nick-button" v-on:click="unPublish()"><i
+        <button v-if="blogPage.published === true && blogPage.aboutPage !== true" class="nick-button" v-on:click="unPublish()"><i
             class="fa-solid fa-trash"></i>
           UnPublish
         </button>
-        <NickCheckBox v-model="blogPage.featured" checkbox-label="Featured"
+        <NickCheckBox v-if="blogPage.aboutPage!== true" v-model="blogPage.featured" checkbox-label="Featured"
                       :on-load-value="blogPage.featured"/>
       </div>
     </div>
