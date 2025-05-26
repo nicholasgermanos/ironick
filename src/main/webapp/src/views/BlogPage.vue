@@ -43,7 +43,7 @@ import { getCoverImage } from '@/utils/blogPageUtils';
 import BlogPageService from '@/services/blogPageService';
 import { isAdmin } from '@/utils/localStorageUtils';
 import NickCheckBox from '@/components/NickCheckBox.vue';
-import { getFormattedDate } from '@/utils/utils';
+import { getFormattedDate, isEmpty } from '@/utils/utils';
 
 export default {
   name: 'BlogPage',
@@ -61,7 +61,17 @@ export default {
     if ( this.about === true ) {
       BlogPageService.getAboutPage().then( response => this.blogPage = response.data );
     } else {
-      BlogPageService.getBlogPage( this.$props.blogID ).then( response => this.blogPage = response.data );
+      if (isAdmin()) {
+        BlogPageService.getBlogPageAuthorized( this.$props.blogID ).then( response => this.blogPage = response.data );
+      } else {
+        BlogPageService.getBlogPage( this.$props.blogID ).then( response => {
+          if (isEmpty(response.data)) {
+            this.$router.push('/')
+          } else {
+            this.blogPage = response.data
+          }
+        } );
+      }
     }
   },
   watch: {

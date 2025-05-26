@@ -13,6 +13,7 @@ const BLOG_PAGE_API_BASE_URL = 'blogPages';
 const BLOG_PAGE_API_PUBLISHED_BY_USER_URL= 'blogPages/';
 const BLOG_PAGE_API_ADD_PAGE_URL = 'addBlogPage/';
 const BLOG_PAGE_API_GET_PAGE_URL = 'getBlogPage/';
+const BLOG_PAGE_API_GET_PAGE_AUTH_URL = 'getBlogPageAuthorized/';
 const BLOG_PAGE_API_DELETE_PAGE_URL = 'deleteBlogPage/';
 const BLOG_PAGE_API_ADD_COVER_IMAGE_URL = 'addCoverImage/';
 const BLOG_PAGE_API_FEATURE_URL = 'markBlogPageFeatured/';
@@ -76,6 +77,10 @@ class BlogPageService {
 
 	getBlogPage( id ) {
 		return axios.get( BLOG_PAGE_API_GET_PAGE_URL + id ).then()
+	}
+
+	getBlogPageAuthorized(id) {
+		return axios.get(BLOG_PAGE_API_GET_PAGE_AUTH_URL + id ).then()
 	}
 
 	featureBlogPage(id) {

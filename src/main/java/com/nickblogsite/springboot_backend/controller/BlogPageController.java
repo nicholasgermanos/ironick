@@ -18,12 +18,12 @@ public class BlogPageController {
 	private final UserRepository     userRepository;
 
 	@GetMapping( "/blogPages/{userID}" )
-	public List<BlogPage> fetchBlogs(@PathVariable final String userID) {
+	public List<BlogPage> fetchBlogs( @PathVariable final String userID ) {
 		final List<BlogPage> blogPages;
-		if (userID == null) {
+		if ( userID == null ) {
 			blogPages = blogPageRepository.getPublishedBlogPages();
 		} else {
-			blogPages = blogPageRepository.getPublishedByUser( userRepository.findById(Long.parseLong(userID)).orElse( null ) );
+			blogPages = blogPageRepository.getPublishedByUser( userRepository.findById( Long.parseLong( userID ) ).orElse( null ) );
 		}
 		blogPages.sort( Comparator.comparingLong( BlogPage::getId ).reversed() );
 		return blogPages;
@@ -39,7 +39,7 @@ public class BlogPageController {
 	@GetMapping( "/about" )
 	public BlogPage getAbout() {
 		final List<BlogPage> blogPages = blogPageRepository.getAboutPage();
-		if (blogPages.isEmpty()) {
+		if ( blogPages.isEmpty() ) {
 			return null;
 		}
 
@@ -62,7 +62,7 @@ public class BlogPageController {
 
 	@GetMapping( "/drafts/{userID}" )
 	public List<BlogPage> fetchDrafts( @PathVariable final String userID ) {
-		final Optional<User> user = userRepository.findById( Long.parseLong( userID ) );
+		final Optional<User> user      = userRepository.findById( Long.parseLong( userID ) );
 		final List<BlogPage> blogPages = blogPageRepository.getUnPublishedByUser( user.orElse( null ) );
 		blogPages.sort( Comparator.comparingLong( BlogPage::getId ).reversed() );
 		return blogPages;
@@ -83,6 +83,19 @@ public class BlogPageController {
 	@GetMapping( "/getBlogPage/{id}" )
 	public BlogPage getBlogPage( @PathVariable( "id" ) final String id ) {
 		try {
+			final BlogPage blogPage = blogPageRepository.findById( Long.parseLong( id ) ).orElse( null );
+			if ( blogPage == null || !blogPage.isPublished() ) {
+				return null;
+			}
+			return blogPage;
+		} catch ( final NumberFormatException e ) {
+			return new BlogPage();
+		}
+	}
+
+	@GetMapping( "/getBlogPageAuthorized/{id}" )
+	public BlogPage getBlogPageAuthorized( @PathVariable( "id" ) final String id ) {
+		try {
 			return blogPageRepository.findById( Long.parseLong( id ) ).orElse( null );
 		} catch ( final NumberFormatException e ) {
 			return new BlogPage();
@@ -102,6 +115,7 @@ public class BlogPageController {
 		blogPage.setFeatured( false );
 		blogPageRepository.save( blogPage );
 	}
+
 	@PostMapping( "/publish/{id}" )
 	public void publishBlogPage( @PathVariable( "id" ) final String id ) {
 		final BlogPage blogPage = blogPageRepository.getReferenceById( Long.parseLong( id ) );
