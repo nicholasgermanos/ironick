@@ -31,7 +31,7 @@
 import BlogPageService from '@/services/blogPageService';
 import { QuillEditor } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
-import { getLoggedInID } from '@/utils/localStorageUtils';
+import { getLoggedInID, isAdmin } from '@/utils/localStorageUtils';
 import { getFormattedDate } from '@/utils/utils';
 
 export default {
@@ -82,7 +82,11 @@ export default {
     blogID: String
   },
   beforeMount() {
-    BlogPageService.getBlogPage( this.$props.blogID ).then( response => this.blogPost = response.data );
+    if (isAdmin()) {
+      BlogPageService.getBlogPageAuthorized( this.$props.blogID ).then( response => this.blogPost = response.data );
+    } else {
+      BlogPageService.getBlogPage( this.$props.blogID ).then( response => this.blogPost = response.data );
+    }
   },
   methods: {
     getFormattedDate,
