@@ -11,6 +11,7 @@ import ContactCard from '@/views/ContactCard.vue'
 import ContributeMenu from '@/views/ContributeMenu.vue';
 import DraftsPage from '@/views/DraftsPage.vue';
 import PublishedPage from '@/views/PublishedPage.vue';
+import AboutPage from '@/views/AboutPage.vue';
 
 const routes = [
 	{ name: 'root', path: '/', component: HomePage },
@@ -25,6 +26,7 @@ const routes = [
 	{ name: 'contribute', path: '/contribute', component: ContributeMenu},
 	{ name: 'drafts', path: '/drafts', component: DraftsPage},
 	{ name: 'published', path: '/published', component: PublishedPage},
+	{ name: 'about', path: '/about', component: AboutPage},
 
 ];
 
@@ -39,7 +41,7 @@ const router = createRouter( {
 } );
 
 router.beforeEach((to, from, next) => {
-	const publicPages = ['root', 'login', 'register', 'blogs', 'blog', 'contact' ];
+	const publicPages = ['root', 'login', 'register', 'blogs', 'blog', 'contact', 'about' ];
 	const authRequired = !publicPages.includes(to.name);
 	const loggedIn = localStorage.getItem('user');
 

@@ -6,9 +6,11 @@ axios.defaults.baseURL = '/api/';
 // No trailing slashes here
 const BLOG_PAGE_API_GET_FEATURED_URL = 'blogPagesFeatured';
 const BLOG_PAGE_API_GET_UN_FEATURED_URL = 'blogPagesUnFeatured';
+const BLOG_PAGE_API_GET_ABOUT= 'about';
+const BLOG_PAGE_API_BASE_URL = 'blogPages';
 
 // Trailing slashes here for appending
-const BLOG_PAGE_API_BASE_URL = 'blogPage/';
+const BLOG_PAGE_API_PUBLISHED_BY_USER_URL= 'blogPages/';
 const BLOG_PAGE_API_ADD_PAGE_URL = 'addBlogPage/';
 const BLOG_PAGE_API_GET_PAGE_URL = 'getBlogPage/';
 const BLOG_PAGE_API_DELETE_PAGE_URL = 'deleteBlogPage/';
@@ -20,6 +22,7 @@ const BLOG_PAGE_API_UNPUBLISH_URL= 'unpublish/';
 const BLOG_PAGE_API_GET_DRAFTS_URL = 'drafts/'
 
 class BlogPageService {
+
 	getBlogPages( getFeatured, getUnFeatured ) {
 		if (getFeatured === true) {
 			return this.getFeaturedBlogPages()
@@ -33,12 +36,17 @@ class BlogPageService {
 	}
 
 	getBlogPagesByUser(userID) {
-		return axios.get(BLOG_PAGE_API_BASE_URL + userID)
+		return axios.get( BLOG_PAGE_API_PUBLISHED_BY_USER_URL + userID)
+	}
+
+	getAboutPage() {
+		return axios.get( BLOG_PAGE_API_GET_ABOUT)
 	}
 
 	getDrafts(userId) {
 		return axios.get( BLOG_PAGE_API_GET_DRAFTS_URL + userId )
 	}
+
 	getFeaturedBlogPages() {
 		return axios.get( BLOG_PAGE_API_GET_FEATURED_URL )
 	}
@@ -77,6 +85,7 @@ class BlogPageService {
 	unFeatureBlogPage(id) {
 		axios.post( BLOG_PAGE_API_UN_FEATURE_URL + id ).then()
 	}
+
 	publishBlogPage(id) {
 		axios.post(BLOG_PAGE_API_PUBLISH_URL + id).then( (response) => {
 			if (isEmpty(response) === false) {
@@ -84,6 +93,7 @@ class BlogPageService {
 			}
 		})
 	}
+
 	unPublishBlogPage(id) {
 		axios.post(BLOG_PAGE_API_UNPUBLISH_URL + id).then((response) => {
 			if (isEmpty(response) === false) {

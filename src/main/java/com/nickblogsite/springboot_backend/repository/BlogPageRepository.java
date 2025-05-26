@@ -22,4 +22,7 @@ public interface BlogPageRepository extends JpaRepository<BlogPage, Long> {
 	@Query("SELECT bp FROM BlogPage bp where bp.published = true AND bp.user = ?1")
 	List<BlogPage> getPublishedByUser( User user );
 
+	@Query("SELECT bp FROM BlogPage bp where bp.isAboutPage = true")
+	List<BlogPage> getAboutPage();
+
 }

@@ -23,10 +23,12 @@
         <router-link :to="{ name: 'entryFormEdit', params: { blogID: blogPage.id } }">
           <button class="nick-button"><i class="fa-solid fa-pencil"></i> Edit</button>
         </router-link>
-        <button v-if="blogPage.published !== true" class="nick-button" v-on:click="publish()"><i class="fa-solid fa-trash"></i>
+        <button v-if="blogPage.published !== true" class="nick-button" v-on:click="publish()"><i
+            class="fa-solid fa-trash"></i>
           Publish
         </button>
-        <button v-if="blogPage.published === true" class="nick-button" v-on:click="unPublish()"><i class="fa-solid fa-trash"></i>
+        <button v-if="blogPage.published === true" class="nick-button" v-on:click="unPublish()"><i
+            class="fa-solid fa-trash"></i>
           UnPublish
         </button>
         <NickCheckBox v-model="blogPage.featured" checkbox-label="Featured"
@@ -52,13 +54,15 @@ export default {
     };
   },
   props: {
-    blogID: String
+    blogID: String,
+    about: Boolean
   },
   beforeMount() {
-    BlogPageService.getBlogPage( this.$props.blogID ).then( response => {
-                                                              this.blogPage = response.data;
-                                                            }
-    );
+    if ( this.about === true ) {
+      BlogPageService.getAboutPage().then( response => this.blogPage = response.data );
+    } else {
+      BlogPageService.getBlogPage( this.$props.blogID ).then( response => this.blogPage = response.data );
+    }
   },
   watch: {
     'blogPage.featured': function() {
@@ -80,16 +84,16 @@ export default {
     },
     getDate() {
       if ( this.blogPage !== null ) {
-        return getFormattedDate(this.blogPage.timestamp)
+        return getFormattedDate( this.blogPage.timestamp );
       }
     },
     publish() {
-      BlogPageService.publishBlogPage(this.blogPage.id)
-      this.$router.push('/')
+      BlogPageService.publishBlogPage( this.blogPage.id );
+      this.$router.push( '/' );
     },
     unPublish() {
-      BlogPageService.unPublishBlogPage(this.blogPage.id)
-      this.$router.push('/drafts')
+      BlogPageService.unPublishBlogPage( this.blogPage.id );
+      this.$router.push( '/drafts' );
     }
   }
 };

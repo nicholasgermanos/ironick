@@ -10,7 +10,7 @@
         <router-link v-if="isAdmin()" to="/contribute"
                      class="fw-bold nav-link navbar-links">Contribute
         </router-link>
-        <router-link to="/contact" class="fw-bold nav-link navbar-links">About</router-link>
+        <router-link to="/about" class="fw-bold nav-link navbar-links">About</router-link>
         <router-link to="/contact" class="fw-bold nav-link navbar-links">Contact</router-link>
         <a href="https://github.com/nicholasgermanos/nickblog" target="_blank"
            class="fw-bold nav-link navbar-links">See

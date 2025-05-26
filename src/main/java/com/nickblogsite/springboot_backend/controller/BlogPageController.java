@@ -17,7 +17,7 @@ public class BlogPageController {
 	private final BlogPageRepository blogPageRepository;
 	private final UserRepository     userRepository;
 
-	@GetMapping( "/blogPage/{userID}" )
+	@GetMapping( "/blogPages/{userID}" )
 	public List<BlogPage> fetchBlogs(@PathVariable final String userID) {
 		final List<BlogPage> blogPages;
 		if (userID == null) {
@@ -27,6 +27,23 @@ public class BlogPageController {
 		}
 		blogPages.sort( Comparator.comparingLong( BlogPage::getId ).reversed() );
 		return blogPages;
+	}
+
+	@GetMapping( "/blogPages" )
+	public List<BlogPage> fetchBlogs() {
+		final List<BlogPage> blogPages = blogPageRepository.getPublishedBlogPages();
+		blogPages.sort( Comparator.comparingLong( BlogPage::getId ).reversed() );
+		return blogPages;
+	}
+
+	@GetMapping( "/about" )
+	public BlogPage getAbout() {
+		final List<BlogPage> blogPages = blogPageRepository.getAboutPage();
+		if (blogPages.isEmpty()) {
+			return null;
+		}
+
+		return blogPages.getFirst();
 	}
 
 	@GetMapping( "/blogPagesFeatured" )
