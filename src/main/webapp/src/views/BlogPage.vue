@@ -141,6 +141,9 @@ p
   display: inline-flex;
   margin-top: 30px;
 
+:deep(.ql-editor)
+  height unset
+
 @media (max-width: $grid-breakpoint-sm )
   .blog-page
     margin-bottom 30px
