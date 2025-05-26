@@ -19,7 +19,7 @@
             <li class="nav-item">
               <router-link to="/blogs" class="fw-bold nav-link navbar-links">About</router-link>
             </li>
-            <li id="fullscreen-button" class="nav-item fullscreen-icon">
+            <li v-if="!isMobile()" id="fullscreen-button" class="nav-item fullscreen-icon">
               <img v-on:click="fullscreen" src="../assets/fullscreen.png" alt="Fullscreen">
             </li>
             /li>
@@ -33,10 +33,12 @@
 <script>
 
 import { isLoggedIn, isLoggedOut } from '@/utils/localStorageUtils';
+import { isMobile } from '@/utils/utils';
 
 export default {
   name: 'MenuBar',
   methods: {
+    isMobile,
     isLoggedIn,
     isLoggedOut,
     fullscreen: function() {

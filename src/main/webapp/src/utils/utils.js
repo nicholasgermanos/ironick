@@ -24,3 +24,7 @@ export function getFormattedDate( timestamp ) {
 	const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
 	return date.toLocaleTimeString( 'en-AU', options );
 }
+
+export function isMobile() {
+	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test( navigator.userAgent );
+}

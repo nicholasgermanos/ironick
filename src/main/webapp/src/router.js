@@ -27,6 +27,7 @@ const routes = [
 	{ name: 'drafts', path: '/drafts', component: DraftsPage},
 	{ name: 'published', path: '/published', component: PublishedPage},
 	{ name: 'about', path: '/about', component: AboutPage},
+	{ name: 'error', path: '/error', component: HomePage},
 
 ];
 
@@ -41,7 +42,7 @@ const router = createRouter( {
 } );
 
 router.beforeEach((to, from, next) => {
-	const publicPages = ['root', 'login', 'register', 'blogs', 'blog', 'contact', 'about' ];
+	const publicPages = ['root', 'login', 'register', 'blogs', 'blog', 'contact', 'about', 'error' ];
 	const authRequired = !publicPages.includes(to.name);
 	const loggedIn = localStorage.getItem('user');
 
