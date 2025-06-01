@@ -72,9 +72,15 @@ public class BlogPageController {
 	@ResponseBody
 	public BlogPage addBlogPage( @PathVariable( "userID" ) final String userID, @RequestBody final BlogPage newBlogPage ) {
 		final User user = userRepository.findById( Long.parseLong( userID ) ).orElse( null );
-		if (user != null) {
-			newBlogPage.setUser(user);
-			newBlogPage.setAuthor( user.getFirstName() + " " + user.getLastName() );
+		if ( user != null ) {
+			newBlogPage.setUser( user );
+			final StringBuilder authorName = new StringBuilder();
+			authorName.append( user.getFirstName() );
+			if ( user.getLastName() != null ) {
+				authorName.append( " " ).append( user.getLastName() );
+			}
+			newBlogPage.setAuthor( authorName.toString() );
+
 		} else {
 			throw new IllegalArgumentException( "User not found" );
 		}
