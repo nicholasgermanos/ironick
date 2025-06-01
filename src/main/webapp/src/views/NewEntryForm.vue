@@ -99,7 +99,7 @@ export default {
       window.onbeforeunload = undefined;
 
       this.blogPost.published = publish;
-      if ( this.blogPost.timestamp === undefined ) {
+      if ( publish === true && this.blogPost.timestamp === undefined || this.blogPost.timestamp === 0 ) {
         this.blogPost.timestamp = Date.now();
       }
 
