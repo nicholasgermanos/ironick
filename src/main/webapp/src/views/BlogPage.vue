@@ -149,6 +149,7 @@ p
 
 .admin-section
   display: inline-flex;
+  flex-wrap: wrap;
   margin-top: 30px;
 
 :deep(.ql-editor)
@@ -157,4 +158,11 @@ p
 @media (max-width: $grid-breakpoint-sm )
   .blog-page
     margin-bottom 30px
+
+	.admin-section {
+		buttion {
+		margin-bottom: 5px;
+		}
+		}
+
 </style>

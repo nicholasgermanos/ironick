@@ -66,6 +66,7 @@ export default {
 
   margin-top: 56px;
   min-height 100vh
+  max-width: 100%;
 
   display flex
   flex 1 1 100%
