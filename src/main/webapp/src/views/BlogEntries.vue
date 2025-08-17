@@ -1,27 +1,29 @@
 <template>
-  <div class="main-content container p-5 flex-wrap">
-    <div class="d-flex flex-wrap justify-content-center">
-      <div v-for="blogEntry of blogEntries" v-bind:key="blogEntry.id">
-        <div class="card zoom">
-          <h1 v-if="isFirstCard(blogEntry.id)">{{ sectionHeader }}</h1>
-          <div class="preview-cover-image">
-            <img :src="getCoverImage(blogEntry)" class="card-img-top" alt="Cover Image">
-          </div>
-          <div class="card-body">
-            <div class="card-headers">
-              <h5 class="funky">{{ blogEntry.title }}</h5>
-              <p>{{ blogEntry.subtitle }}</p>
-            </div>
-            <div class="card-read-button">
-              <router-link v-if="blogEntry.id" :to="{name: 'blog', params: {blogID: blogEntry.id}}" class="w-full">
-                <button class="nick-button">Read<span class="arrow fa-solid fa-arrow-right"/></button>
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="main-content container p-5 flex-wrap">
+		<div class="d-flex flex-wrap justify-content-center">
+			<div v-for="blogEntry of blogEntries" v-bind:key="blogEntry.id">
+				<div class="card zoom">
+					<h1 v-if="isFirstCard(blogEntry.id)">{{ sectionHeader }}</h1>
+					<div class="preview-cover-image">
+						<img :src="getCoverImage(blogEntry)" class="card-img-top" alt="Cover Image">
+					</div>
+					<div class="card-body">
+						<div class="card-headers">
+							<h5 class="funky">{{ blogEntry.title }}</h5>
+							<p>{{ blogEntry.subtitle }}</p>
+						</div>
+						<div class="card-read-button">
+							<p class="by">by {{ blogEntry.author }}</p>
+							<router-link v-if="blogEntry.id" :to="{ name: 'blog', params: { blogID: blogEntry.id } }"
+								class="w-full">
+								<button class="nick-button">Read<span class="arrow fa-solid fa-arrow-right" /></button>
+							</router-link>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -31,48 +33,48 @@ import { isEmpty } from '@/utils/utils';
 import { getLoggedInID } from '@/utils/localStorageUtils';
 
 export default {
-  name: 'BlogEntries',
-  components: {},
-  data() {
-    return {
-      blogEntries: [],
-      firstBlogEntry: 0
-    };
-  },
-  props: {
-    sectionHeader: {
-      type: String,
-      default: 'Articles'
-    },
-    featured: Boolean,
-    unFeatured: Boolean,
-    drafts: Boolean,
-    fetchUserBlogs: Boolean
-  },
-  methods: {
-    getCoverImage,
-    getBlogPages() {
-      if ( this.fetchUserBlogs === true ) {
-        BlogPageService.getBlogPagesByUser( getLoggedInID() ).then( ( response ) => this.setBlogEntries( response ) );
-      } else if ( this.drafts === true ) {
-        BlogPageService.getDrafts( getLoggedInID() ).then( ( response ) => this.setBlogEntries( response ) );
-      } else {
-        BlogPageService.getBlogPages( this.featured, this.unFeatured ).then( ( response ) => this.setBlogEntries( response ) )
-      }
-    },
-    isFirstCard( id ) {
-      return id === this.firstBlogEntry;
-    },
-    setBlogEntries( response ) {
-      if ( isEmpty( response.data ) !== true ) {
-        this.blogEntries = response.data;
-        this.firstBlogEntry = this.blogEntries[ 0 ].id;
-      }
-    }
-  },
-  mounted() {
-    this.getBlogPages();
-  }
+	name: 'BlogEntries',
+	components: {},
+	data() {
+		return {
+			blogEntries: [],
+			firstBlogEntry: 0
+		};
+	},
+	props: {
+		sectionHeader: {
+			type: String,
+			default: 'Articles'
+		},
+		featured: Boolean,
+		unFeatured: Boolean,
+		drafts: Boolean,
+		fetchUserBlogs: Boolean
+	},
+	methods: {
+		getCoverImage,
+		getBlogPages() {
+			if (this.fetchUserBlogs === true) {
+				BlogPageService.getBlogPagesByUser(getLoggedInID()).then((response) => this.setBlogEntries(response));
+			} else if (this.drafts === true) {
+				BlogPageService.getDrafts(getLoggedInID()).then((response) => this.setBlogEntries(response));
+			} else {
+				BlogPageService.getBlogPages(this.featured, this.unFeatured).then((response) => this.setBlogEntries(response))
+			}
+		},
+		isFirstCard(id) {
+			return id === this.firstBlogEntry;
+		},
+		setBlogEntries(response) {
+			if (isEmpty(response.data) !== true) {
+				this.blogEntries = response.data;
+				this.firstBlogEntry = this.blogEntries[0].id;
+			}
+		}
+	},
+	mounted() {
+		this.getBlogPages();
+	}
 };
 </script>
 
@@ -122,6 +124,9 @@ img
 
 // Buttons
 .card-read-button
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
   height: 40%;
   text-align: right;
   margin-right: 10px;
